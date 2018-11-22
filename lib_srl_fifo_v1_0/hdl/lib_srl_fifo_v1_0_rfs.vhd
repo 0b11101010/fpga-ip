@@ -38,7 +38,7 @@
 -- ** expressly prohibited.                                               **
 -- **                                                                     **
 -- ** Any modifications that are made to the Source Code are              **
--- ** done at the user’s sole risk and will be unsupported.               **
+-- ** done at the userï¿½s sole risk and will be unsupported.               **
 -- ** The Xilinx Support Hotline does not have access to source           **
 -- ** code and therefore cannot answer specific questions related         **
 -- ** to source HDL. The Xilinx Hotline support of original source        **
@@ -282,7 +282,7 @@ end architecture imp;
 -- ** expressly prohibited.                                               **
 -- **                                                                     **
 -- ** Any modifications that are made to the Source Code are              **
--- ** done at the user’s sole risk and will be unsupported.               **
+-- ** done at the userï¿½s sole risk and will be unsupported.               **
 -- ** The Xilinx Support Hotline does not have access to source           **
 -- ** code and therefore cannot answer specific questions related         **
 -- ** to source HDL. The Xilinx Hotline support of original source        **
@@ -543,7 +543,7 @@ end behavioral;
 -- ** expressly prohibited.                                               **
 -- **                                                                     **
 -- ** Any modifications that are made to the Source Code are              **
--- ** done at the user’s sole risk and will be unsupported.               **
+-- ** done at the userï¿½s sole risk and will be unsupported.               **
 -- ** The Xilinx Support Hotline does not have access to source           **
 -- ** code and therefore cannot answer specific questions related         **
 -- ** to source HDL. The Xilinx Hotline support of original source        **
@@ -674,7 +674,7 @@ library lib_srl_fifo_v1_0_2;
 entity srl_fifo_rbu_f is
   generic (
     C_DWIDTH : natural;
-    C_DEPTH  : positive := 16;
+    C_DEPTH  : positive := 128;
     C_FAMILY : string   := "nofamily"
     );
   port (
@@ -877,7 +877,7 @@ end architecture imp;
 -- ** expressly prohibited.                                               **
 -- **                                                                     **
 -- ** Any modifications that are made to the Source Code are              **
--- ** done at the user’s sole risk and will be unsupported.               **
+-- ** done at the userï¿½s sole risk and will be unsupported.               **
 -- ** The Xilinx Support Hotline does not have access to source           **
 -- ** code and therefore cannot answer specific questions related         **
 -- ** to source HDL. The Xilinx Hotline support of original source        **
@@ -978,7 +978,7 @@ use     lib_pkg_v1_0_2.lib_pkg.clog2;
 entity srl_fifo_f is
   generic (
     C_DWIDTH : natural;
-    C_DEPTH  : positive := 16;
+    C_DEPTH  : positive := 128;
     C_FAMILY : string := "nofamily"
     );
   port (

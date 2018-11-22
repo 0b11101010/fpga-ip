@@ -84,9 +84,9 @@ generic (
     Rst              : in  std_logic;                     -- Rst
     Sys_clk          : in  std_logic;                     -- Sys Clock
     Rclk             : in  std_logic;                     -- Receiver clock  
-    Fcr              : in  std_logic_vector(7 downto 0 ); -- Fifo Control reg
+    Fcr              : in  std_logic_vector(31 downto 0 ); -- Fifo Control reg
     Rx_fifo_empty    : in  std_logic;                     -- Rx fifo empty
-    Rx_fifo_count    : in  std_logic_vector(3 downto 0 ); -- Rx fifo count
+    Rx_fifo_count    : in  std_logic_vector(6 downto 0 ); -- Rx fifo count
     Rx_fifo_rd_en    : in  std_logic;                     -- Rx fifo read en
     Rx_fifo_wr_en    : in  std_logic;                     -- Rx fifo write en
     Rx_fifo_data_in  : in  std_logic_vector(10 downto 0); -- Rx fifo data in
@@ -110,8 +110,8 @@ attribute DowngradeIPIdentifiedWarnings of implementation : architecture is "yes
 -------------------------------------------------------------------------------
 -- Signal Declarations
 -------------------------------------------------------------------------------
-  signal trigger_level_in        : std_logic_vector(1 downto 0 );
-  signal fifo_trigger_level      : std_logic_vector(3 downto 0 );
+  signal trigger_level_in        : std_logic_vector(2 downto 0 );
+  signal fifo_trigger_level      : std_logic_vector(6 downto 0 );
   signal fifo_trigger_level_flag : std_logic;
   signal character_counter       : std_logic_vector(9 downto 0);
   signal character_counter_rst   : std_logic;
@@ -119,7 +119,7 @@ attribute DowngradeIPIdentifiedWarnings of implementation : architecture is "yes
   
 begin
 
-  trigger_level_in <= Fcr(7) & Fcr(6);
+  trigger_level_in <= Fcr(7) & Fcr(6) & Fcr(5);
 
   -----------------------------------------------------------------------------
   -- PROCESS: FIFO_TRIGGER_LEVEL_DECODE_PROCESS
@@ -128,17 +128,21 @@ begin
   FIFO_TRIGGER_LEVEL_DECODE_PROCESS : process (trigger_level_in)
   begin  -- process
     case trigger_level_in is
-      when "00" =>
-        fifo_trigger_level <= "0000";   
-      when "01" =>                      
-        fifo_trigger_level <= "0011";   
-      when "10" =>                      
-        fifo_trigger_level <= "0111";   
-      when "11" =>                      
-        fifo_trigger_level <= "1101";   
+      when "000" =>
+        fifo_trigger_level <= "0000000";   
+      when "010" =>                      
+        fifo_trigger_level <= "0000011";   
+      when "100" =>                      
+        fifo_trigger_level <= "0000111";
+      when "110" =>                      
+        fifo_trigger_level <= "0001101";
+      
+      -- extended mode
+      when "111" =>
+        fifo_trigger_level <= Fcr(14 downto 8);  
       -- coverage off
       when others =>
-        fifo_trigger_level <= "0000"; 
+        fifo_trigger_level <= "0000000"; 
       -- coverage on  
     end case;
   end process;
@@ -530,7 +534,8 @@ entity tx_fifo_block is
     Tx_fifo_rd_en    : in  std_logic;                     -- Tx fifo read en  
     Tx_fifo_rst      : in  std_logic;                     -- Tx fifo Rst   
     Tx_fifo_empty    : out std_logic;                     -- Tx fifo empty  
-    Tx_fifo_full     : out std_logic                      -- Tx fifo full   
+    Tx_fifo_full     : out std_logic;                     -- Tx fifo full
+    Tx_fifo_addr     : out std_logic_vector(6 downto 0)   
     );
 
 end tx_fifo_block;
@@ -548,17 +553,19 @@ attribute DowngradeIPIdentifiedWarnings of implementation : architecture is "yes
   signal tx_fifo_full_i  : std_logic;
   signal tx_fifo_rd_en_i : std_logic;
   signal tx_fifo_wr_en_i : std_logic;
+  signal tx_fifo_addr_i  : std_logic_vector(6 downto 0);
 
 begin
   Tx_fifo_empty   <= tx_fifo_empty_i;
   Tx_fifo_full    <= tx_fifo_full_i;
+  Tx_fifo_addr    <= tx_fifo_addr_i;
   tx_fifo_rd_en_i <= Tx_fifo_rd_en and (not tx_fifo_empty_i);
   tx_fifo_wr_en_i <= Tx_fifo_wr_en and (not tx_fifo_full_i);
  
    srl_fifo_rbu_f_i1 : entity lib_srl_fifo_v1_0_2.srl_fifo_rbu_f
      generic map (
        C_DWIDTH => 8,
-       C_DEPTH  => 16,
+       C_DEPTH  => 128,
        C_FAMILY => C_FAMILY
                  )
      port map (
@@ -570,8 +577,8 @@ begin
        Data_Out      => Tx_fifo_data_out,  -- [out]
        FIFO_Full     => tx_fifo_full_i,    -- [out]
        FIFO_Empty    => tx_fifo_empty_i,   -- [out]
-       Addr          => open,              -- [out]
-       Num_To_Reread => X"0",              -- [in]
+       Addr          => tx_fifo_addr_i,    -- [out]
+       Num_To_Reread => "0000000",         -- [in]
        Underflow     => open,              -- [out]
        Overflow      => open);             -- [out]
   -------------------------------------------    
@@ -1110,13 +1117,14 @@ entity rx_fifo_block is
     Rx_fifo_wr_en    : in  std_logic;                      -- Rx fifo write en
     Rx_fifo_rd_en    : in  std_logic;                      -- Rx fifo read en
     Rx_fifo_rst      : in  std_logic;                      -- Rx fifo rst
-    Fcr              : in  std_logic_vector(7 downto 0 );  -- Fifo Control reg
+    Fcr              : in  std_logic_vector(31 downto 0 );  -- Fifo Control reg
     Rx_fifo_data_out : out std_logic_vector(10 downto 0 ); -- Rx fifo data out
     Rx_fifo_empty    : out std_logic;                      -- Rx fifo empty
     Rx_fifo_timeout  : out std_logic;                      -- Rx fifo timeout 
     Rx_fifo_trigger  : out std_logic;                      -- Rx fifo trigger
     Rx_fifo_full     : out std_logic;                      -- Rx fifo full
-    Rx_error_in_fifo : out std_logic                       -- Rx error in fifo
+    Rx_error_in_fifo : out std_logic;                      -- Rx error in fifo
+    Rx_fifo_addr     : out std_logic_vector(6 downto 0)
     );
 
 
@@ -1137,7 +1145,7 @@ attribute DowngradeIPIdentifiedWarnings of implementation : architecture is "yes
 -------------------------------------------------------------------------------
   signal rx_fifo_empty_i   : std_logic;
   signal rx_fifo_full_i    : std_logic;
-  signal rx_fifo_count     : std_logic_vector(3 downto 0);
+  signal rx_fifo_addr_i    : std_logic_vector(6 downto 0);
   signal rx_fifo_rd_en_i   : std_logic;
   signal rx_fifo_wr_en_i   : std_logic;
   
@@ -1147,6 +1155,7 @@ begin
   Rx_fifo_full    <= rx_fifo_full_i;
   rx_fifo_rd_en_i <= Rx_fifo_rd_en and (not rx_fifo_empty_i);
   rx_fifo_wr_en_i <= Rx_fifo_wr_en and (not rx_fifo_full_i);
+  Rx_fifo_addr    <= rx_fifo_addr_i;
 
   -----------------------------------------------------------------------------
   -- Instantiating rx_fifo_control module
@@ -1157,7 +1166,7 @@ begin
     port map (
       Fcr              => Fcr,
       Rx_fifo_empty    => rx_fifo_empty_i,
-      rx_fifo_count    => rx_fifo_count,
+      rx_fifo_count    => rx_fifo_addr_i,
       Rx_fifo_rd_en    => rx_fifo_rd_en_i,
       Rx_fifo_wr_en    => rx_fifo_wr_en_i,
       Rx_fifo_data_in  => Rx_fifo_data_in,
@@ -1175,7 +1184,7 @@ begin
   srl_fifo_rbu_f_i1 : entity lib_srl_fifo_v1_0_2.srl_fifo_rbu_f
     generic map (
       C_DWIDTH => 11,
-      C_DEPTH  => 16,
+      C_DEPTH  => 128,
       C_FAMILY => C_FAMILY 
                 )
     port map (
@@ -1187,8 +1196,9 @@ begin
       Data_Out      => Rx_fifo_data_out,   -- [out]
       FIFO_Full     => rx_fifo_full_i,     -- [out]
       FIFO_Empty    => rx_fifo_empty_i,    -- [out]
-      Addr          => rx_fifo_count,      -- [out]
-      Num_To_Reread => X"0",               -- [in]
+      --Addr          => rx_fifo_count,      -- [out]
+      Addr          => rx_fifo_addr_i,      -- [out]
+      Num_To_Reread => "0000000",          -- [in]
       Underflow     => open,               -- [out]
       Overflow      => open);              -- [out]
   -------------------------------------------       
@@ -2274,8 +2284,8 @@ entity uart16550 is
     C_EXTERNAL_XIN_CLK_HZ : integer  := 50_000_000;  -- XIN Clock Frequency
     C_FAMILY              : string   := "virtex7"); -- XILINX FPGA family
   port (
-    Din           : in  std_logic_vector (7 downto 0);  -- data bus in
-    Dout          : out std_logic_vector (7 downto 0);  -- data bus out
+    Din           : in  std_logic_vector (31 downto 0);  -- data bus in
+    Dout          : out std_logic_vector (31 downto 0);  -- data bus out
     Sout          : out std_logic;   -- serial output
     BaudoutN      : out std_logic;   -- baud clock output
     BaudoutN_int  : out std_logic;   -- baud internal clock 
@@ -2381,7 +2391,7 @@ attribute DowngradeIPIdentifiedWarnings of implementation : architecture is "yes
   signal dlab                 : std_logic;  -- divisor latch access bit Lcr[7]
   signal addr_d               : std_logic_vector (2 downto 0);  
                                             -- internal address latch
-  signal internalBus          : std_logic_vector (7 downto 0);  
+  signal internalBus          : std_logic_vector (31 downto 0);  
                                             -- internal data bus
   signal baudCounter          : std_logic_vector (15 downto 0);  
                                             -- baud clock generator
@@ -2448,7 +2458,7 @@ attribute DowngradeIPIdentifiedWarnings of implementation : architecture is "yes
   signal dcdN_d               : std_logic;  -- data carrier detect (active low)
   signal dsrN_d               : std_logic;  -- data set ready (active low)
   signal riN_d                : std_logic;
-  signal d_d                  : std_logic_vector(7 downto 0);
+  signal d_d                  : std_logic_vector(31 downto 0);
   signal load_baudlower       : std_logic;
   signal load_baudupper       : std_logic;
   signal divisor_latch_loaded : std_logic;
@@ -2467,7 +2477,7 @@ attribute DowngradeIPIdentifiedWarnings of implementation : architecture is "yes
   -----------------------------------------------------------------------------
   -- fifo related signals
   signal fifo_mode1 : std_logic;
-  signal fcr        : std_logic_vector (7 downto 0);  -- fifo control register
+  signal fcr        : std_logic_vector (31 downto 0);  -- fifo control register
   signal fcr_0_prev : std_logic;  -- register to hold previous value of fcr(0)
   signal fcr_w_sel  : std_logic;  -- selects fcr (write only)
   signal fcr_r_sel  : std_logic;  -- selcts fcr (read only, not in the spec)
@@ -2477,6 +2487,8 @@ attribute DowngradeIPIdentifiedWarnings of implementation : architecture is "yes
   signal tx_fifo_rd_en_int : std_logic;
   signal tx_fifo_full      : std_logic;
   signal tx_fifo_empty     : std_logic;
+  signal tx_fifo_addr_i    : std_logic_vector(6 downto 0);
+  signal tx_fifo_count_r   : std_logic_vector(7 downto 0);
 
   -- receiver fifo signals
   signal rx_fifo_timeout      : std_logic;
@@ -2494,6 +2506,8 @@ attribute DowngradeIPIdentifiedWarnings of implementation : architecture is "yes
   signal have_bi_in_fifo_n    : std_logic;
   signal rx_fifo_rd_en_d1     : std_logic;
   signal lsr2_rst             : std_logic;
+  signal rx_fifo_addr_i       : std_logic_vector(6 downto 0);
+  signal rx_fifo_count_r      : std_logic_vector(7 downto 0);
 
   signal rx_error_in_fifo_lst : std_logic;
   signal rx_error_out_fifo    : std_logic;
@@ -2528,6 +2542,11 @@ begin  -- implementation
 -------------------------------------------------------------------------------
   RxrdyN <= rxrdyN_int;
   TxrdyN <= txrdyN_int;
+
+-------------------------------------------------------------------------------
+  rx_fifo_count_r <= ("0" & rx_fifo_addr_i) + "00000001" when lsr(0) = '1' else "00000000";
+  tx_fifo_count_r <= ("0" & tx_fifo_addr_i) + "00000001" when lsr(5) = '0' else "00000000";
+-------------------------------------------------------------------------------
 
 -------------------------------------------------------------------------------
 -- PROCESS: RXRDYN_PROCESS
@@ -2669,34 +2688,44 @@ begin  -- implementation
   begin  -- process readRegisters
     if Sys_clk'EVENT and Sys_clk = '1' then
       if Rst = '1' then
-        Dout <= "00000000";
+        Dout <= "00000000000000000000000000000000";
       elsif readStrobe = '1' then
         if rbr_sel = '1' then
           if fcr(0) = '1' then
-            Dout <= rx_fifo_data_out(7 downto 0);
+            Dout(7 downto 0) <= rx_fifo_data_out(7 downto 0);
+            Dout(31 downto 8) <= (others => '0');
           else
-            Dout <= Rbr;
+            Dout(7 downto 0) <= Rbr;
+            Dout(31 downto 8) <= (others => '0');
           end if;
         elsif ier_sel = '1' then
-          Dout <= ier;
+          Dout(7 downto 0) <= ier;
+          Dout(31 downto 8) <= (others => '0');
         elsif iir_sel = '1' then
-          Dout <= iir;
+          Dout(7 downto 0) <= iir;
+          Dout(31 downto 8) <= (others => '0');
         elsif fcr_r_sel = '1' then
           Dout <= fcr;
         elsif lcr_sel = '1' then
-          Dout <= Lcr;
+          Dout(7 downto 0) <= Lcr;
+          Dout(31 downto 8) <= (others => '0');
         elsif mcr_sel = '1' then
-          Dout <= mcr;
+          Dout(7 downto 0) <= mcr;
+          Dout(31 downto 8) <= (others => '0');
         elsif lsr_sel = '1' then
-          Dout <= lsr;
+          Dout(31 downto 0) <= "00000000" & tx_fifo_count_r & rx_fifo_count_r & lsr;
         elsif msr_sel = '1' then
-          Dout <= msr;
+          Dout(7 downto 0) <= msr;
+          Dout(31 downto 8) <= (others => '0');
         elsif scr_sel = '1' then
-          Dout <= scr;
+          Dout(7 downto 0) <= scr;
+          Dout(31 downto 8) <= (others => '0');
         elsif dll_sel = '1' then
-          Dout <= dll;
+          Dout(7 downto 0) <= dll;
+          Dout(31 downto 8) <= (others => '0');
         elsif dlm_sel = '1' then
-          Dout <= dlm;
+          Dout(7 downto 0) <= dlm;
+          Dout(31 downto 8) <= (others => '0');
         -- coverage off
         else
           Dout <= (others => '0');
@@ -2717,7 +2746,7 @@ begin  -- implementation
         Thr             <= (others => '1');
         writing_thr     <= '0';
       elsif writeStrobe = '1' and thr_sel = '1' then
-        Thr         <= internalBus;
+        Thr         <= internalBus(7 downto 0);
         writing_thr <= '1';
       else
         writing_thr <= '0';
@@ -2856,7 +2885,7 @@ begin  -- implementation
         Lcr  <= "00000011";
         dlab <= '0';
       elsif writeStrobe = '1' and lcr_sel = '1' then
-        Lcr  <= internalBus;
+        Lcr  <= internalBus(7 downto 0);
       else
         dlab <= Lcr(7);
       end if;
@@ -3195,7 +3224,7 @@ begin  -- implementation
       if Rst = '1' then
         scr <= "00000000";
       elsif writeStrobe = '1' and scr_sel = '1' then
-        scr <= internalBus;
+        scr <= internalBus(7 downto 0);
       end if;
     end if;
   end process SCR_WRITE;
@@ -3211,7 +3240,7 @@ begin  -- implementation
         --dll <= "00000000";
         dll <= BAUD_DEFAULT_X(7 downto 0);
       elsif writeStrobe = '1' and dll_sel = '1' then
-        dll <= internalBus;
+        dll <= internalBus(7 downto 0);
       end if;
     end if;
   end process DLL_WRITE;
@@ -3227,7 +3256,7 @@ begin  -- implementation
         --dlm <= "00000000";
         dlm <= BAUD_DEFAULT_X(15 downto 8);
       elsif writeStrobe = '1' and dlm_sel = '1' then
-        dlm <= internalBus;
+        dlm <= internalBus(7 downto 0);
       end if;
     end if;
   end process DLM_WRITE;
@@ -3582,12 +3611,12 @@ begin  -- implementation
     begin  -- process fcrWrite
       if Sys_clk'EVENT and Sys_clk = '1' then
         if Rst = '1' then  -- fcr(0) must be set to write fcr(7 downto 1)
-          fcr(7 downto 1) <= (others => '0');
+          fcr(31 downto 1) <= (others => '0');
         elsif writeStrobe = '1' and fcr_w_sel = '1' and fcr_0_prev = '1' then
-          fcr(7 downto 1) <= internalBus(7 downto 6) & "00" & 
+          fcr(31 downto 1) <= internalBus(31 downto 5) & '0' & 
                              internalBus(3 downto 1);
         else
-          fcr(7 downto 1) <= fcr(7 downto 6) & "00" & fcr(3) & "00";
+          fcr(31 downto 1) <= fcr(31 downto 5) & '0' & fcr(3) & "00";
         end if;
       end if;
     end process FCR_1_WRITE;
@@ -3621,7 +3650,8 @@ begin  -- implementation
         Tx_fifo_rd_en    => tx_fifo_rd_en,
         Tx_fifo_rst      => tx_fifo_rst,
         Tx_fifo_empty    => tx_fifo_empty,
-        Tx_fifo_full     => tx_fifo_full);
+        Tx_fifo_full     => tx_fifo_full,
+        Tx_fifo_addr     => tx_fifo_addr_i);
 
     ---------------------------------------------------------------------------
         -- PROCESS: TX_FIFO_READ_EN
@@ -3669,7 +3699,9 @@ begin  -- implementation
         Rx_fifo_timeout    => rx_fifo_timeout,
         Rx_fifo_trigger    => rx_fifo_trigger,
         Rx_fifo_full       => rx_fifo_full,
-        Rx_error_in_fifo   => rx_error_in_fifo);
+        Rx_error_in_fifo   => rx_error_in_fifo,
+        Rx_fifo_addr       => rx_fifo_addr_i
+        );
 
     ---------------------------------------------------------------------------
     -- PROCESS: RX_FIFO_READ_EN
@@ -4243,8 +4275,8 @@ attribute DowngradeIPIdentifiedWarnings of imp : architecture is "yes";
       C_HAS_EXTERNAL_XIN    => C_HAS_EXTERNAL_XIN,
       C_EXTERNAL_XIN_CLK_HZ => C_EXTERNAL_XIN_CLK_HZ)
     port map (
-      Din          => Bus2IP_Data(7 downto 0),
-      Dout         => IP2Bus_Data(7 downto 0),
+      Din          => Bus2IP_Data(31 downto 0),
+      Dout         => IP2Bus_Data(31 downto 0),
       Sout         => Sout,
       BaudoutN     => BaudoutN,
       BaudoutN_int => baudoutN_int, 
@@ -4279,7 +4311,7 @@ attribute DowngradeIPIdentifiedWarnings of imp : architecture is "yes";
 
 
   -- IPIC signals
-  IP2Bus_Data(AXI_DATA_WIDTH-1 downto 8) <= (others => '0');
+  --IP2Bus_Data(AXI_DATA_WIDTH-1 downto 8) <= (others => '0');
   IP2INTC_Irpt  <= uart_intr;  
   Intr          <= uart_intr;
 
