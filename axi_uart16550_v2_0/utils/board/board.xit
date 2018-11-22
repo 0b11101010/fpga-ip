@@ -1,0 +1,32 @@
+package require xilinx::board 1.0
+namespace import ::xilinx::board::*
+set instname [current_inst]
+set f_xdc [add_ipfile -usedIn  [list synthesis implementation board ] -force ${instname}_board.xdc]
+puts_ipfile $f_xdc "#--------------------Physical Constraints-----------------\n"
+if { [get_project_property BOARD] == "" } {
+    close_ipfile $f_xdc
+    return 
+}
+
+set instname [current_inst]
+set board_if [get_property PARAM_VALUE.UART_BOARD_INTERFACE]
+if { $board_if ne "Custom"} {
+    board_add_port_constraints $f_xdc $board_if RI rin  
+    board_add_port_constraints $f_xdc $board_if TxD sout 
+    board_add_port_constraints $f_xdc $board_if TXRDYn txrdyn  
+    board_add_port_constraints $f_xdc $board_if DCDn dcdn 
+    board_add_port_constraints $f_xdc $board_if RxD sin  
+    board_add_port_constraints $f_xdc $board_if OUT1n out1n  
+    board_add_port_constraints $f_xdc $board_if OUT2n out2n  
+    board_add_port_constraints $f_xdc $board_if DSRn dsrn  
+    board_add_port_constraints $f_xdc $board_if BAUDOUTn baudoutn 
+    board_add_port_constraints $f_xdc $board_if RTSn rtsn 
+    board_add_port_constraints $f_xdc $board_if DDIS ddis 
+    board_add_port_constraints $f_xdc $board_if XOUT xout  
+    board_add_port_constraints $f_xdc $board_if RCLK rclk   
+    board_add_port_constraints $f_xdc $board_if CTSn ctsn  
+    board_add_port_constraints $f_xdc $board_if XIN xin  
+    board_add_port_constraints $f_xdc $board_if RXRDYn rxrdyn  
+    board_add_port_constraints $f_xdc $board_if DTRn dtrn  
+}
+close_ipfile $f_xdc

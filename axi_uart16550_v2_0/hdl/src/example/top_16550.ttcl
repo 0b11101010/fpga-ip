@@ -1,0 +1,524 @@
+<: ;#Component and file information :>
+<: set ComponentName [getComponentNameString] :>
+<: setOutputDirectory [ttcl_string_concat $ComponentName "/example_design"] :>
+<: setFileName [ttcl_string_concat $ComponentName "_exdes"] :>
+<: set c_family [getProjectFamily] :>
+<: set aclk_freq [getIntValue "C_S_AXI_ACLK_FREQ_HZ"] :>
+<: set is_16550 [getIntValue "C_IS_A_16550"] :>
+<: set xin_freq [getIntValue "C_EXTERNAL_XIN_CLK_HZ"] :>
+<: set rclk [getIntValue "C_HAS_EXTERNAL_RCLK"] :>
+<: set xin [getIntValue "C_HAS_EXTERNAL_XIN"] :>
+<: set is_blankout 1 :>
+<: set wd [ file dirname [ get_property xml_file_name [ current_ipbom ] ] ] :>
+<: setFileExtension ".vhd" :>
+-- (c) Copyright 2009 - 2013 Xilinx, Inc. All rights reserved.
+-- 
+-- This file contains confidential and proprietary information
+-- of Xilinx, Inc. and is protected under U.S. and
+-- international copyright and other intellectual property
+-- laws.
+-- 
+-- DISCLAIMER
+-- This disclaimer is not a license and does not grant any
+-- rights to the materials distributed herewith. Except as
+-- otherwise provided in a valid license issued to you by
+-- Xilinx, and to the maximum extent permitted by applicable
+-- law: (1) THESE MATERIALS ARE MADE AVAILABLE "AS IS" AND
+-- WITH ALL FAULTS, AND XILINX HEREBY DISCLAIMS ALL WARRANTIES
+-- AND CONDITIONS, EXPRESS, IMPLIED, OR STATUTORY, INCLUDING
+-- BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, NON-
+-- INFRINGEMENT, OR FITNESS FOR ANY PARTICULAR PURPOSE; and
+-- (2) Xilinx shall not be liable (whether in contract or tort,
+-- including negligence, or under any other theory of
+-- liability) for any loss or damage of any kind or nature
+-- related to, arising under or in connection with these
+-- materials, including for any direct, or any indirect,
+-- special, incidental, or consequential loss or damage
+-- (including loss of data, profits, goodwill, or any type of
+-- loss or damage suffered as a result of any action brought
+-- by a third party) even if such damage or loss was
+-- reasonably foreseeable or Xilinx had been advised of the
+-- possibility of the same.
+-- 
+-- CRITICAL APPLICATIONS
+-- Xilinx products are not designed or intended to be fail-
+-- safe, or for use in any application requiring fail-safe
+-- performance, such as life-support or safety devices or
+-- systems, Class III medical devices, nuclear facilities,
+-- applications related to the deployment of airbags, or any
+-- other applications that could lead to death, personal
+-- injury, or severe property or environmental damage
+-- (individually and collectively, "Critical
+-- Applications"). Customer assumes the sole risk and
+-- liability of any use of Xilinx products in Critical
+-- Applications, subject only to applicable laws and
+-- regulations governing limitations on product liability.
+-- 
+-- THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS
+-- PART OF THIS FILE AT ALL TIMES.
+
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use ieee.std_logic_misc.all;
+use ieee.std_logic_arith.all;
+use ieee.std_logic_unsigned.all;
+
+
+library unisim;
+use unisim.vcomponents.all;
+library work;
+
+entity <=: $ComponentName :>_exdes is
+--   generic (
+--        USE_ATG : integer range 0 to 1 := 0
+--   );
+   port (
+         clk_in1_p : in std_logic;
+         clk_in1_n : in std_logic;
+         reset : in std_logic;
+         start : in std_logic;
+         done : out std_logic; 
+         ip2intc_irpt     : out std_logic;
+         freeze           : in  std_logic;
+         baudoutn         : out std_logic;
+         ctsn             : in  std_logic;
+         dcdn             : in  std_logic;
+         ddis             : out std_logic;
+         dsrn             : in  std_logic;
+         dtrn             : out std_logic;
+         out1n            : out std_logic;
+         out2n            : out std_logic;
+         rin              : in  std_logic;
+         rtsn             : out std_logic;
+         rxrdyn           : out std_logic;
+         sin              : in  std_logic;
+         sout             : out std_logic;
+         txrdyn           : out std_logic;
+         glow_led         : out std_logic;
+<:  if {$xin} { :>
+         xin              : in  std_logic := '0';
+         xout             : out std_logic;
+<:  } :>
+<:  if {$rclk} { :>
+         rclk             : in  std_logic := '0';
+<:  } :>
+         ip2intc_irpt_1     : out std_logic;
+         freeze_1           : in  std_logic;
+         baudoutn_1         : out std_logic;
+         ctsn_1             : in  std_logic;
+         dcdn_1             : in  std_logic;
+         ddis_1             : out std_logic;
+         dsrn_1             : in  std_logic;
+         dtrn_1             : out std_logic;
+         out1n_1            : out std_logic;
+         out2n_1            : out std_logic;
+         rin_1              : in  std_logic;
+         rtsn_1             : out std_logic;
+         rxrdyn_1           : out std_logic;
+         sin_1              : in  std_logic;
+         sout_1             : out std_logic;
+         txrdyn_1           : out std_logic;
+<:  if {$xin} { :>
+         xin_1              : in  std_logic := '0';
+         xout_1             : out std_logic;
+<:  } :>
+<:  if {$rclk} { :>
+         rclk_1             : in  std_logic := '0';
+<:  } :>
+         reset_atg : in std_logic;
+         atg_done : out std_logic;
+         status : out std_logic);
+
+
+end entity;
+
+architecture impl of <=: $ComponentName :>_exdes is
+
+-- Pragma Added to supress synth warnings
+attribute DowngradeIPIdentifiedWarnings: string;
+attribute DowngradeIPIdentifiedWarnings of impl : architecture is "yes";
+
+
+component clock_gen is
+     port (
+           clk_in1_p : in std_logic;
+           clk_in1_n : in std_logic;
+           reset    : in std_logic;
+           locked   : out std_logic;
+           clock_lite : out std_logic;
+           clock : out std_logic
+          );
+
+end component;
+
+component <=:$ComponentName:> is
+  PORT (
+
+    s_axi_aclk       : in  std_logic;
+    s_axi_aresetn    : in  std_logic;
+    ip2intc_irpt     : out std_logic;
+    freeze           : in  std_logic;
+
+-- AXI signals
+    s_axi_awaddr     : in  std_logic_vector(12 downto 0);
+    s_axi_awvalid    : in  std_logic;
+    s_axi_awready    : out std_logic;
+    s_axi_wdata      : in  std_logic_vector(31 downto 0);
+    s_axi_wstrb      : in  std_logic_vector(3 downto 0);
+    s_axi_wvalid     : in  std_logic;
+    s_axi_wready     : out std_logic;
+    s_axi_bresp      : out std_logic_vector(1 downto 0);
+    s_axi_bvalid     : out std_logic;
+    s_axi_bready     : in  std_logic;
+    s_axi_araddr     : in  std_logic_vector(12 downto 0);
+    s_axi_arvalid    : in  std_logic;
+    s_axi_arready    : out std_logic;
+    s_axi_rdata      : out std_logic_vector(31 downto 0);
+    s_axi_rresp      : out std_logic_vector(1 downto 0);
+    s_axi_rvalid     : out std_logic;
+    s_axi_rready     : in  std_logic;
+
+    -- UART16550 Interface Signals
+    baudoutn         : out std_logic;
+    ctsn             : in  std_logic;
+    dcdn             : in  std_logic;
+    ddis             : out std_logic;
+    dsrn             : in  std_logic;
+    dtrn             : out std_logic;
+    out1n            : out std_logic;
+    out2n            : out std_logic;
+    rin              : in  std_logic;
+    rtsn             : out std_logic;
+    rxrdyn           : out std_logic;
+    sin              : in  std_logic;
+    sout             : out std_logic;
+<:  if {$xin} { :>
+         xin              : in  std_logic := '0';
+         xout             : out std_logic;
+<:  } :>
+<:  if {$rclk} { :>
+         rclk             : in  std_logic := '0';
+<:  } :>
+    txrdyn           : out std_logic
+
+          );
+
+end component;
+
+component axi_traffic_gen_0 is 
+  port (
+  s_axi_aclk : in std_logic;
+  s_axi_aresetn : in std_logic;
+  m_axi_lite_ch1_awaddr : out std_logic_vector (31 downto 0);
+  m_axi_lite_ch1_awprot : out std_logic_vector (2 downto 0);
+  m_axi_lite_ch1_awvalid : out std_logic;
+  m_axi_lite_ch1_awready : in std_logic;
+  m_axi_lite_ch1_wdata : out std_logic_vector (31 downto 0);
+  m_axi_lite_ch1_wstrb : out std_logic_vector (3 downto 0);
+  m_axi_lite_ch1_wvalid : out std_logic;
+  m_axi_lite_ch1_wready : in std_logic;
+  m_axi_lite_ch1_bresp : in std_logic_vector (1 downto 0);
+  m_axi_lite_ch1_bvalid : in std_logic;
+  m_axi_lite_ch1_bready : out std_logic;
+  m_axi_lite_ch1_araddr : out std_logic_vector (31 downto 0);
+  m_axi_lite_ch1_arvalid : out std_logic;
+  m_axi_lite_ch1_arready : in std_logic;
+  m_axi_lite_ch1_rdata : in std_logic_vector (31 downto 0);
+  m_axi_lite_ch1_rvalid : in std_logic;
+  m_axi_lite_ch1_rready : out std_logic;
+  m_axi_lite_ch1_rresp : in std_logic_vector (1 downto 0);
+  done : out std_logic;
+  status : out std_logic_vector (31 downto 0)
+);
+end component;
+
+ATTRIBUTE SYN_BLACK_BOX : BOOLEAN;
+ATTRIBUTE SYN_BLACK_BOX OF axi_traffic_gen_0 : COMPONENT IS TRUE;
+ATTRIBUTE BLACK_BOX_PAD_PIN : STRING;
+ATTRIBUTE BLACK_BOX_PAD_PIN OF axi_traffic_gen_0 : COMPONENT IS "s_axi_aclk,s_axi_aresetn,irq_out,m_axi_lite_ch1_awaddr[31:0],m_axi_lite_ch1_awprot[2:0],m_axi_lite_ch1_awvalid,m_axi_lite_ch1_awready,m_axi_lite_ch1_wdata[31:0],m_axi_lite_ch1_wstrb[3:0],m_axi_lite_ch1_wvalid,m_axi_lite_ch1_wready,m_axi_lite_ch1_bresp[1:0],m_axi_lite_ch1_bvalid,m_axi_lite_ch1_bready,m_axi_lite_ch1_araddr[31:0],m_axi_lite_ch1_arvalid,m_axi_lite_ch1_arready,m_axi_lite_ch1_rdata[31:0],m_axi_lite_ch1_rvalid,m_axi_lite_ch1_rready,m_axi_lite_ch1_rresp[1:0]";
+
+
+component axi_traffic_gen_1 is 
+  port (
+  s_axi_aclk : in std_logic;
+  s_axi_aresetn : in std_logic;
+  m_axi_lite_ch1_awaddr : out std_logic_vector (31 downto 0);
+  m_axi_lite_ch1_awprot : out std_logic_vector (2 downto 0);
+  m_axi_lite_ch1_awvalid : out std_logic;
+  m_axi_lite_ch1_awready : in std_logic;
+  m_axi_lite_ch1_wdata : out std_logic_vector (31 downto 0);
+  m_axi_lite_ch1_wstrb : out std_logic_vector (3 downto 0);
+  m_axi_lite_ch1_wvalid : out std_logic;
+  m_axi_lite_ch1_wready : in std_logic;
+  m_axi_lite_ch1_bresp : in std_logic_vector (1 downto 0);
+  m_axi_lite_ch1_bvalid : in std_logic;
+  m_axi_lite_ch1_bready : out std_logic;
+  m_axi_lite_ch1_araddr : out std_logic_vector (31 downto 0);
+  m_axi_lite_ch1_arvalid : out std_logic;
+  m_axi_lite_ch1_arready : in std_logic;
+  m_axi_lite_ch1_rdata : in std_logic_vector (31 downto 0);
+  m_axi_lite_ch1_rvalid : in std_logic;
+  m_axi_lite_ch1_rready : out std_logic;
+  m_axi_lite_ch1_rresp : in std_logic_vector (1 downto 0);
+  done : out std_logic;
+  status : out std_logic_vector (31 downto 0)
+);
+end component;
+
+ATTRIBUTE SYN_BLACK_BOX_1 : BOOLEAN;
+ATTRIBUTE SYN_BLACK_BOX_1 OF axi_traffic_gen_1 : COMPONENT IS TRUE;
+ATTRIBUTE BLACK_BOX_PAD_PIN_1 : STRING;
+ATTRIBUTE BLACK_BOX_PAD_PIN_1 OF axi_traffic_gen_1 : COMPONENT IS "s_axi_aclk,s_axi_aresetn,irq_out,m_axi_lite_ch1_awaddr[31:0],m_axi_lite_ch1_awprot[2:0],m_axi_lite_ch1_awvalid,m_axi_lite_ch1_awready,m_axi_lite_ch1_wdata[31:0],m_axi_lite_ch1_wstrb[3:0],m_axi_lite_ch1_wvalid,m_axi_lite_ch1_wready,m_axi_lite_ch1_bresp[1:0],m_axi_lite_ch1_bvalid,m_axi_lite_ch1_bready,m_axi_lite_ch1_araddr[31:0],m_axi_lite_ch1_arvalid,m_axi_lite_ch1_arready,m_axi_lite_ch1_rdata[31:0],m_axi_lite_ch1_rvalid,m_axi_lite_ch1_rready,m_axi_lite_ch1_rresp[1:0]";
+
+signal    m_axi_lite_awready          :  std_logic                         ;-- AXI4-Lite
+signal    m_axi_lite_awvalid          :  std_logic                         ;-- AXI4-Lite
+signal    m_axi_lite_awaddr           :  std_logic_vector (31 downto 0);-- AXI4-Lite
+signal    m_axi_lite_wready           :  std_logic                         ;-- AXI4-Lite
+signal    m_axi_lite_wvalid           :  std_logic                         ;-- AXI4-Lite
+signal    m_axi_lite_wdata            :  std_logic_vector (31 downto 0);-- AXI4-Lite
+signal    m_axi_lite_bready           :  std_logic                         ;-- AXI4-Lite
+signal    m_axi_lite_bvalid           :  std_logic                         ;-- AXI4-Lite
+signal    m_axi_lite_bresp            :  std_logic_vector(1 downto 0)      ;-- AXI4-Lite
+signal    s_axi_lite_arready          :  std_logic                         ;-- AXI4-Lite
+signal    s_axi_lite_arvalid          :  std_logic                         ;-- AXI4-Lite
+signal    s_axi_lite_araddr           :  std_logic_vector (31 downto 0);-- AXI4-Lite
+signal    s_axi_lite_rready           :  std_logic                         ;-- AXI4-Lite
+signal    s_axi_lite_rvalid           :  std_logic                         ;-- AXI4-Lite
+signal    s_axi_lite_rdata            :  std_logic_vector (31 downto 0);-- AXI4-Lite
+signal    s_axi_lite_rresp            :  std_logic_vector(1 downto 0)      ;-- AXI4-Lite
+
+signal    m_axi_lite_awready_1          :  std_logic                         ;-- AXI4-Lite
+signal    m_axi_lite_awvalid_1           :  std_logic                         ;-- AXI4-Lite
+signal    m_axi_lite_awaddr_1           :  std_logic_vector (31 downto 0);-- AXI4-Lite
+signal    m_axi_lite_wready_1           :  std_logic                         ;-- AXI4-Lite
+signal    m_axi_lite_wvalid_1           :  std_logic                         ;-- AXI4-Lite
+signal    m_axi_lite_wdata_1            :  std_logic_vector (31 downto 0);-- AXI4-Lite
+signal    m_axi_lite_bready_1           :  std_logic                         ;-- AXI4-Lite
+signal    m_axi_lite_bvalid_1           :  std_logic                         ;-- AXI4-Lite
+signal    m_axi_lite_bresp_1            :  std_logic_vector(1 downto 0)      ;-- AXI4-Lite
+signal    s_axi_lite_arready_1          :  std_logic                         ;-- AXI4-Lite
+signal    s_axi_lite_arvalid_1          :  std_logic                         ;-- AXI4-Lite
+signal    s_axi_lite_araddr_1           :  std_logic_vector (31 downto 0);-- AXI4-Lite
+signal    s_axi_lite_rready_1           :  std_logic                         ;-- AXI4-Lite
+signal    s_axi_lite_rvalid_1           :  std_logic                         ;-- AXI4-Lite
+signal    s_axi_lite_rdata_1            :  std_logic_vector (31 downto 0);-- AXI4-Lite
+signal    s_axi_lite_rresp_1            :  std_logic_vector(1 downto 0)      ;-- AXI4-Lite
+--signal    ip2intc_irpt  : std_logic ;  
+--signal    freeze        : std_logic ;   
+--signal    baudoutn      : std_logic ;  
+--signal    ctsn          : std_logic ;
+--signal    dcdn          : std_logic ;  
+--signal    ddis          : std_logic ; 
+--signal    dsrn          : std_logic ;  
+--signal    dtrn          : std_logic ; 
+--signal    out1n         : std_logic ;
+--signal    out2n         : std_logic ; 
+--signal    rclk          : std_logic ; 
+--signal    rin           : std_logic ; 
+--signal    rtsn          : std_logic ; 
+--signal    rxrdyn        : std_logic ;
+--signal    sin           : std_logic ; 
+--signal    sout          : std_logic ; 
+--signal    txrdyn        : std_logic ;
+--signal    xin           : std_logic ;  
+--signal    xout          : std_logic ; 
+
+
+  signal clock_lite : std_logic;
+  signal clock : std_logic;
+  signal locked : std_logic;
+  signal reset_lock : std_logic;
+ signal irq_out : std_logic;
+---
+signal awlen : std_logic_vector (7 downto 0);
+signal awvalid : std_logic;
+signal init_done : std_logic; 
+signal counter : std_logic_vector (7 downto 0);
+signal wvalid : std_logic;
+---
+
+signal pass : std_logic;
+signal fail : std_logic;
+signal cdma_intr : std_logic;
+signal done_int : std_logic;
+--signal atg_done: std_logic;
+signal atg_status: std_logic_vector (31 downto 0);
+signal atg_done_1: std_logic;
+signal atg_status_1: std_logic_vector (31 downto 0);
+
+
+begin
+
+CLOCK_GEN_INST : clock_gen 
+         port map (
+           clk_in1_p => clk_in1_p,
+           clk_in1_n => clk_in1_n,
+           reset    => reset,
+           locked   => locked,  
+           clock_lite => clock_lite,
+           clock => clock);      
+
+reset_lock <= locked;
+
+
+
+ATG1:  axi_traffic_gen_0 
+   port map (
+    s_axi_aclk         => clock_lite,
+    s_axi_aresetn      => reset_lock,
+    m_axi_lite_ch1_awaddr   => m_axi_lite_awaddr,
+    m_axi_lite_ch1_awprot   => open,
+    m_axi_lite_ch1_awvalid  => m_axi_lite_awvalid,
+    m_axi_lite_ch1_awready  => m_axi_lite_awready,
+    m_axi_lite_ch1_wdata    => m_axi_lite_wdata,
+    m_axi_lite_ch1_wstrb    => open,
+    m_axi_lite_ch1_wvalid   => m_axi_lite_wvalid,
+    m_axi_lite_ch1_wready   => m_axi_lite_wready,
+    m_axi_lite_ch1_bresp    => m_axi_lite_bresp,
+    m_axi_lite_ch1_bvalid   => m_axi_lite_bvalid,
+    m_axi_lite_ch1_bready   => m_axi_lite_bready,
+    m_axi_lite_ch1_araddr   => s_axi_lite_araddr,
+    m_axi_lite_ch1_arvalid  => s_axi_lite_arvalid,
+    m_axi_lite_ch1_arready  => s_axi_lite_arready,
+    m_axi_lite_ch1_rdata    => s_axi_lite_rdata,
+    m_axi_lite_ch1_rvalid   => s_axi_lite_rvalid,
+    m_axi_lite_ch1_rready   => s_axi_lite_rready,
+    m_axi_lite_ch1_rresp    => s_axi_lite_rresp,
+    done                    => atg_done,
+    status                  => atg_status
+  );
+
+
+
+DUT : <=: $ComponentName :>
+    PORT MAP (
+    ip2intc_irpt     => ip2intc_irpt    ,
+    freeze           => freeze          ,
+    baudoutn         => baudoutn        ,
+    ctsn             => ctsn            ,
+    dcdn             => dcdn            ,
+    ddis             => ddis            ,
+    dsrn             => dsrn            ,
+    dtrn             => dtrn            ,
+    out1n            => out1n           ,
+    out2n            => out2n           ,
+    rin              => rin             ,
+    rtsn             => rtsn            ,
+    rxrdyn           => rxrdyn          ,
+    sin              => sin             ,
+    sout             => sout            ,
+    txrdyn           => txrdyn          ,
+<:  if {$rclk} { :>
+    rclk             => rclk            ,
+<:  } :>
+<:  if {$xin} { :>
+    xin              => xin             ,
+    xout             => xout            ,
+<:  } :>
+
+    s_axi_aclk  => clock_lite,
+    s_axi_aresetn  => reset_lock,
+    s_axi_awaddr    => m_axi_lite_awaddr(12 downto 0),
+    s_axi_awvalid    => m_axi_lite_awvalid,
+    s_axi_awready     => m_axi_lite_awready,
+    s_axi_wdata      =>  m_axi_lite_wdata,
+    s_axi_wstrb      => x"f",
+    s_axi_wvalid     =>   m_axi_lite_wvalid,
+    s_axi_wready     =>    m_axi_lite_wready,
+    s_axi_bresp      =>     m_axi_lite_bresp,
+    s_axi_bvalid     =>      m_axi_lite_bvalid,
+    s_axi_bready     =>       m_axi_lite_bready,
+    s_axi_araddr     =>       s_axi_lite_araddr(12 downto 0),
+    s_axi_arvalid    =>       s_axi_lite_arvalid,
+    s_axi_arready    =>       s_axi_lite_arready,
+    s_axi_rdata      =>       s_axi_lite_rdata,
+    s_axi_rresp      =>       s_axi_lite_rresp,
+    s_axi_rvalid     =>       s_axi_lite_rvalid,
+    s_axi_rready     =>       s_axi_lite_rready
+    );
+----------------------------------------------------------------------------
+-- Compliment ATG and DUT for loop back
+----------------------------------------------------------------------------
+
+ATG2:  axi_traffic_gen_1 
+   port map (
+    s_axi_aclk         => clock_lite,
+    s_axi_aresetn      => reset_atg,
+    m_axi_lite_ch1_awaddr   => m_axi_lite_awaddr_1,
+    m_axi_lite_ch1_awprot   => open,
+    m_axi_lite_ch1_awvalid  => m_axi_lite_awvalid_1,
+    m_axi_lite_ch1_awready  => m_axi_lite_awready_1,
+    m_axi_lite_ch1_wdata    => m_axi_lite_wdata_1,
+    m_axi_lite_ch1_wstrb    => open,
+    m_axi_lite_ch1_wvalid   => m_axi_lite_wvalid_1,
+    m_axi_lite_ch1_wready   => m_axi_lite_wready_1,
+    m_axi_lite_ch1_bresp    => m_axi_lite_bresp_1,
+    m_axi_lite_ch1_bvalid   => m_axi_lite_bvalid_1,
+    m_axi_lite_ch1_bready   => m_axi_lite_bready_1,
+    m_axi_lite_ch1_araddr   => s_axi_lite_araddr_1,
+    m_axi_lite_ch1_arvalid  => s_axi_lite_arvalid_1,
+    m_axi_lite_ch1_arready  => s_axi_lite_arready_1,
+    m_axi_lite_ch1_rdata    => s_axi_lite_rdata_1,
+    m_axi_lite_ch1_rvalid   => s_axi_lite_rvalid_1,
+    m_axi_lite_ch1_rready   => s_axi_lite_rready_1,
+    m_axi_lite_ch1_rresp    => s_axi_lite_rresp_1,
+    done                    => atg_done_1,
+    status                  => atg_status_1
+  );
+
+
+
+
+DUT_1 : <=: $ComponentName :>
+    PORT MAP (
+    ip2intc_irpt     => ip2intc_irpt_1    ,
+    freeze           => freeze_1          ,
+    baudoutn         => baudoutn_1        ,
+    ctsn             => ctsn_1            ,
+    dcdn             => dcdn_1            ,
+    ddis             => ddis_1            ,
+    dsrn             => dsrn_1            ,
+    dtrn             => dtrn_1            ,
+    out1n            => out1n_1           ,
+    out2n            => out2n_1           ,
+    rin              => rin_1             ,
+    rtsn             => rtsn_1            ,
+    rxrdyn           => rxrdyn_1          ,
+    sin              => sin_1             ,
+    sout             => sout_1            ,
+    txrdyn           => txrdyn_1          ,
+<:  if {$rclk} { :>
+    rclk             => rclk_1            ,
+<:  } :>
+<:  if {$xin} { :>
+    xin              => xin_1             ,
+    xout             => xout_1            ,
+<:  } :>
+
+    s_axi_aclk  => clock_lite,
+    s_axi_aresetn  => reset_lock,
+    s_axi_awaddr    => m_axi_lite_awaddr_1(12 downto 0),
+    s_axi_awvalid    => m_axi_lite_awvalid_1,
+    s_axi_awready     => m_axi_lite_awready_1,
+    s_axi_wdata      =>  m_axi_lite_wdata_1,
+    s_axi_wstrb      => x"f",
+    s_axi_wvalid     =>   m_axi_lite_wvalid_1,
+    s_axi_wready     =>    m_axi_lite_wready_1,
+    s_axi_bresp      =>     m_axi_lite_bresp_1,
+    s_axi_bvalid     =>      m_axi_lite_bvalid_1,
+    s_axi_bready     =>       m_axi_lite_bready_1,
+    s_axi_araddr     =>       s_axi_lite_araddr_1(12 downto 0),
+    s_axi_arvalid    =>       s_axi_lite_arvalid_1,
+    s_axi_arready    =>       s_axi_lite_arready_1,
+    s_axi_rdata      =>       s_axi_lite_rdata_1,
+    s_axi_rresp      =>       s_axi_lite_rresp_1,
+    s_axi_rvalid     =>       s_axi_lite_rvalid_1,
+    s_axi_rready     =>       s_axi_lite_rready_1
+    );
+
+glow_led <= '1' when (atg_done_1 = '1' and atg_status_1(1 downto 0) = "01") else '0' ;
+
+end impl;
+

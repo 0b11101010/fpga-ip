@@ -1,0 +1,268 @@
+<: ;#Component and file information :>
+<: set ComponentName [getComponentNameString] :>
+<: setOutputDirectory [ttcl_string_concat $ComponentName "/example_design"] :>
+<: setFileName [ttcl_string_concat $ComponentName "_exdes_tb"] :>
+<: set aclk_freq [getIntValue "C_S_AXI_ACLK_FREQ_HZ"] :>
+<: set is_16550 [getIntValue "C_IS_A_16550"] :>
+<: set xin_freq [getIntValue "C_EXTERNAL_XIN_CLK_HZ"] :>
+<: set rclk [getIntValue "C_HAS_EXTERNAL_RCLK"] :>
+<: set xin [getIntValue "C_HAS_EXTERNAL_XIN"] :>
+<: setFileExtension ".vhd" :>
+<: set t1 [expr {1000000000.0/$aclk_freq}] :>
+<: set t2 [expr {1000000000.0/$xin_freq}] :>
+<: set axi_per [format "%3.3f" $t1] :>
+<: set xin_per [format "%3.3f" $t2] :>
+
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use ieee.std_logic_misc.all;
+use ieee.std_logic_textio.all;
+
+library std;
+use std.textio.all;
+
+
+
+entity <=: $ComponentName :>_exdes_tb is
+
+end entity;
+
+architecture tb of <=: $ComponentName :>_exdes_tb is
+
+component <=: $ComponentName :>_exdes 
+   port (
+         clk_in1_p : in std_logic;
+         clk_in1_n : in std_logic;
+         reset : in std_logic;
+         start : in std_logic;
+         done : out std_logic; 
+         ip2intc_irpt     : out std_logic;
+         freeze           : in  std_logic;
+         baudoutn         : out std_logic;
+         ctsn             : in  std_logic;
+         dcdn             : in  std_logic;
+         ddis             : out std_logic;
+         dsrn             : in  std_logic;
+         dtrn             : out std_logic;
+         out1n            : out std_logic;
+         out2n            : out std_logic;
+         rin              : in  std_logic;
+         rtsn             : out std_logic;
+         rxrdyn           : out std_logic;
+         sin              : in  std_logic;
+         sout             : out std_logic;
+         txrdyn           : out std_logic;
+         glow_led         : out std_logic;
+<:  if {$xin} { :>
+         xin              : in  std_logic := '0';
+         xout             : out std_logic;
+<:  } :>
+<:  if {$rclk} { :>
+         rclk             : in  std_logic := '0';
+<:  } :>
+         ip2intc_irpt_1     : out std_logic;
+         freeze_1           : in  std_logic;
+         baudoutn_1         : out std_logic;
+         ctsn_1             : in  std_logic;
+         dcdn_1             : in  std_logic;
+         ddis_1             : out std_logic;
+         dsrn_1             : in  std_logic;
+         dtrn_1             : out std_logic;
+         out1n_1            : out std_logic;
+         out2n_1            : out std_logic;
+         rin_1              : in  std_logic;
+         rtsn_1             : out std_logic;
+         rxrdyn_1           : out std_logic;
+         sin_1              : in  std_logic;
+         sout_1             : out std_logic;
+         txrdyn_1           : out std_logic;
+<:  if {$xin} { :>
+         xin_1              : in  std_logic := '0';
+         xout_1             : out std_logic;
+<:  } :>
+<:  if {$rclk} { :>
+         rclk_1             : in  std_logic := '0';
+<:  } :>
+         reset_atg : in std_logic;
+         atg_done : out std_logic;
+         status : out std_logic
+);
+end component;
+
+constant clk_per : time := 5 ns;
+constant xin_clk_per : time := <=:$xin_per :> ns;
+signal clock : std_logic := '0';
+signal clock_n : std_logic := '1';
+signal xin_clk : std_logic := '0';
+signal reset : std_logic := '1';
+signal start : std_logic := '0';
+signal status : std_logic := '0';
+signal test : std_logic := '0';
+signal done : std_logic := '0';
+signal    ip2intc_irpt  : std_logic ;  
+signal    freeze        : std_logic ;   
+signal    baudoutn      : std_logic ;  
+signal    ctsn          : std_logic ;
+signal    dcdn          : std_logic ;  
+signal    ddis          : std_logic ; 
+signal    dsrn          : std_logic ;  
+signal    dtrn          : std_logic ; 
+signal    out1n         : std_logic ;
+signal    out2n         : std_logic ; 
+signal    rclk          : std_logic ; 
+signal    rin           : std_logic ; 
+signal    rtsn          : std_logic ; 
+signal    rxrdyn        : std_logic ;
+signal    sin           : std_logic ; 
+signal    sout          : std_logic ; 
+signal    txrdyn        : std_logic ;
+--signal    xin           : std_logic ;  
+signal    xout          : std_logic ; 
+signal    ip2intc_irpt_1  : std_logic ;  
+signal    freeze_1        : std_logic ;   
+signal    baudoutn_1      : std_logic ;  
+signal    ctsn_1          : std_logic ;
+signal    dcdn_1          : std_logic ;  
+signal    ddis_1          : std_logic ; 
+signal    dsrn_1          : std_logic ;  
+signal    dtrn_1          : std_logic ; 
+signal    out1n_1         : std_logic ;
+signal    out2n_1         : std_logic ; 
+signal    rclk_1          : std_logic ; 
+signal    rin_1           : std_logic ; 
+signal    rtsn_1          : std_logic ; 
+signal    rxrdyn_1        : std_logic ;
+signal    sin_1           : std_logic ; 
+signal    sout_1          : std_logic ; 
+signal    txrdyn_1        : std_logic ;
+--signal    xin_1           : std_logic ;  
+signal    xout_1          : std_logic ; 
+signal    atg_done          : std_logic ; 
+signal    glow_led        : std_logic ; 
+signal   reset_atg      : std_logic := '0' ; 
+
+
+
+
+begin
+
+process
+begin
+    wait for (clk_per/2);
+    clock <= not clock;
+    clock_n <= not clock_n;
+
+end process;
+
+process
+begin
+    wait for (xin_clk_per/2);
+    xin_clk <= not xin_clk;
+
+end process;
+
+ reset <= '0' after 50 ns;
+ 
+  
+
+start <= '1' after 100 ns;
+freeze <= '0';
+freeze_1 <= '0';
+--test <= '1' after 300 ns;
+
+DUT_TB: <=: $ComponentName :>_exdes
+      port map (
+      clk_in1_p => clock,
+      clk_in1_n => clock_n,
+      reset => reset,
+      start => start,
+      done => done,
+      ip2intc_irpt     => ip2intc_irpt    ,
+      freeze           => freeze          ,
+      baudoutn         => baudoutn        ,
+      ctsn             => ctsn            ,
+      dcdn             => dcdn            ,
+      ddis             => ddis            ,
+      dsrn             => dsrn            ,
+      dtrn             => dtrn            ,
+      out1n            => out1n           ,
+      out2n            => out2n           ,
+      rin              => rin             ,
+      rtsn             => rtsn            ,
+      rxrdyn           => rxrdyn          ,
+      sin              => sin             ,
+      sout             => sout            ,
+      txrdyn           => txrdyn          ,
+      glow_led         => glow_led        ,
+<:  if {$xin} { :>
+      xin              => xin_clk             ,
+      xout             => xout            ,
+<:  } :>
+<:  if {$rclk} { :>
+      rclk             => rclk            ,
+<:  } :>
+    ip2intc_irpt_1     => ip2intc_irpt_1    ,
+    freeze_1           => freeze_1          ,
+    baudoutn_1         => baudoutn_1        ,
+    ctsn_1             => ctsn_1            ,
+    dcdn_1             => dcdn_1            ,
+    ddis_1             => ddis_1            ,
+    dsrn_1             => dsrn_1            ,
+    dtrn_1             => dtrn_1            ,
+    out1n_1            => out1n_1           ,
+    out2n_1            => out2n_1           ,
+    rin_1              => rin_1             ,
+    rtsn_1             => rtsn_1            ,
+    rxrdyn_1           => rxrdyn_1          ,
+    sin_1              => sout             ,
+    sout_1             => sout_1            ,
+    txrdyn_1           => txrdyn_1          ,
+<:  if {$rclk} { :>
+    rclk_1             => baudoutn            ,
+<:  } :>
+<:  if {$xin} { :>
+    xin_1              => xout             ,
+    xout_1             => xout_1            ,
+<:  } :>
+     reset_atg => reset_atg ,
+      atg_done => atg_done , 
+      status => status 
+      );
+
+process (glow_led)
+    procedure simtimeprint is
+      variable outline : line;
+    begin
+      write(outline, string'("## SYSTEM_CYCLE_COUNTER "));
+      write(outline, NOW/clk_per);
+      write(outline, string'(" ns"));
+      writeline(output,outline);
+    end simtimeprint;
+begin
+
+if (glow_led = '1') then
+ simtimeprint;
+ report "Test Completed Successfully" severity failure;
+end if;
+end process;
+
+process(clock) is 
+begin
+if(atg_done = '1') then
+ reset_atg <= '1' after 1159000 ns;
+else
+ reset_atg <= '1' after 400 ns;
+end if ;
+end process;
+
+process
+begin
+     wait for 100000000 ns;
+     report "Test Failed !! Test Timed Out" severity failure;
+end process;
+
+    
+end tb;
+
