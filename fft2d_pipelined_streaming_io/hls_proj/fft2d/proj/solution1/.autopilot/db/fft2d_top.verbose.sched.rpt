@@ -1,0 +1,249 @@
+
+
+================================================================
+== Vivado HLS Report for 'fft2d_top'
+================================================================
+* Date:           Fri May  1 00:15:25 2020
+
+* Version:        2019.1 (Build 2552052 on Fri May 24 15:28:33 MDT 2019)
+* Project:        proj
+* Solution:       solution1
+* Product family: zynquplus
+* Target device:  xczu7ev-ffvc1156-2-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing (ns): 
+    * Summary: 
+    +--------+-------+----------+------------+
+    |  Clock | Target| Estimated| Uncertainty|
+    +--------+-------+----------+------------+
+    |ap_clk  |   2.50|     2.188|        0.31|
+    +--------+-------+----------+------------+
+
++ Latency (clock cycles): 
+    * Summary: 
+    +-------+-------+------+------+----------+
+    |    Latency    |   Interval  | Pipeline |
+    |  min  |  max  |  min |  max |   Type   |
+    +-------+-------+------+------+----------+
+    |  17299|  17299|  8898|  8898| dataflow |
+    +-------+-------+------+------+----------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        N/A
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 1
+ResetActiveHigh: 1
+IsCombinational: 2
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 0
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 16
+* Pipeline : 0
+* Dataflow Pipeline: 1
+  DF-Pipeline-0: Size = 16, States = { 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 }
+
+* FSM state transitions: 
+1 --> 2 
+2 --> 3 
+3 --> 4 
+4 --> 5 
+5 --> 6 
+6 --> 7 
+7 --> 8 
+8 --> 9 
+9 --> 10 
+10 --> 11 
+11 --> 12 
+12 --> 13 
+13 --> 14 
+14 --> 15 
+15 --> 16 
+16 --> 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 0.00>
+ST_1 : Operation 17 [1/1] (0.00ns)   --->   "%arr1 = alloca [1024 x i64], align 8" [fft2d_top.cpp:110]   --->   Operation 17 'alloca' 'arr1' <Predicate = true> <Delay = 0.00> <Core = "RAM_2P_URAM">   --->   Core 43 'RAM_2P_URAM' <Latency = 1> <II = 1> <Delay = 1.23> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 64> <Depth = 1024> <RAM>
+ST_1 : Operation 18 [1/1] (0.00ns)   --->   "%arr0 = alloca [1024 x i64], align 8" [fft2d_top.cpp:105]   --->   Operation 18 'alloca' 'arr0' <Predicate = true> <Delay = 0.00> <Core = "RAM_2P_URAM">   --->   Core 43 'RAM_2P_URAM' <Latency = 1> <II = 1> <Delay = 1.23> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 64> <Depth = 1024> <RAM>
+ST_1 : Operation 19 [1/1] (0.00ns)   --->   "%xk_fifo_V = alloca i64, align 8" [fft2d_top.cpp:101]   --->   Operation 19 'alloca' 'xk_fifo_V' <Predicate = true> <Delay = 0.00> <Core = "FIFO">   --->   Core 32 'FIFO' <Latency = 0> <II = 1> <Delay = 1.63> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 64> <Depth = 32> <FIFO>
+ST_1 : Operation 20 [1/1] (0.00ns)   --->   "%xk_mid_col_fifo_V = alloca i64, align 8" [fft2d_top.cpp:97]   --->   Operation 20 'alloca' 'xk_mid_col_fifo_V' <Predicate = true> <Delay = 0.00> <Core = "FIFO">   --->   Core 32 'FIFO' <Latency = 0> <II = 1> <Delay = 1.63> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 64> <Depth = 32> <FIFO>
+ST_1 : Operation 21 [1/1] (0.00ns)   --->   "%xk_mid_row_fifo_V = alloca i64, align 8" [fft2d_top.cpp:89]   --->   Operation 21 'alloca' 'xk_mid_row_fifo_V' <Predicate = true> <Delay = 0.00> <Core = "FIFO">   --->   Core 32 'FIFO' <Latency = 0> <II = 1> <Delay = 1.63> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 64> <Depth = 32> <FIFO>
+ST_1 : Operation 22 [1/1] (0.00ns)   --->   "%xn_fifo_V = alloca i64, align 8"   --->   Operation 22 'alloca' 'xn_fifo_V' <Predicate = true> <Delay = 0.00> <Core = "FIFO">   --->   Core 32 'FIFO' <Latency = 0> <II = 1> <Delay = 1.63> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 64> <Depth = 32> <FIFO>
+
+State 2 <SV = 1> <Delay = 0.00>
+ST_2 : Operation 23 [2/2] (0.00ns)   --->   "call fastcc void @Loop_l_rd_xn_proc23(i64* %xn_data, i1* %xn_last, i64* %xn_fifo_V)"   --->   Operation 23 'call' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 3 <SV = 2> <Delay = 0.00>
+ST_3 : Operation 24 [1/2] (0.00ns)   --->   "call fastcc void @Loop_l_rd_xn_proc23(i64* %xn_data, i1* %xn_last, i64* %xn_fifo_V)"   --->   Operation 24 'call' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 4 <SV = 3> <Delay = 0.00>
+ST_4 : Operation 25 [2/2] (0.00ns)   --->   "call fastcc void @Loop_l_f1d_row_proc2(i64* %xk_mid_row_fifo_V, i64* %xn_fifo_V)"   --->   Operation 25 'call' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 5 <SV = 4> <Delay = 0.00>
+ST_5 : Operation 26 [1/2] (0.00ns)   --->   "call fastcc void @Loop_l_f1d_row_proc2(i64* %xk_mid_row_fifo_V, i64* %xn_fifo_V)"   --->   Operation 26 'call' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 6 <SV = 5> <Delay = 0.00>
+ST_6 : Operation 27 [2/2] (0.00ns)   --->   "call fastcc void @Loop_l_transp_mid_pr(i64* %xk_mid_row_fifo_V, [1024 x i64]* %arr0)"   --->   Operation 27 'call' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 7 <SV = 6> <Delay = 0.00>
+ST_7 : Operation 28 [1/2] (0.00ns)   --->   "call fastcc void @Loop_l_transp_mid_pr(i64* %xk_mid_row_fifo_V, [1024 x i64]* %arr0)"   --->   Operation 28 'call' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 8 <SV = 7> <Delay = 0.00>
+ST_8 : Operation 29 [2/2] (0.00ns)   --->   "call fastcc void @Loop_l_f1d_col_proc2(i64* %xk_mid_col_fifo_V, [1024 x i64]* %arr0)"   --->   Operation 29 'call' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 9 <SV = 8> <Delay = 0.00>
+ST_9 : Operation 30 [1/2] (0.00ns)   --->   "call fastcc void @Loop_l_f1d_col_proc2(i64* %xk_mid_col_fifo_V, [1024 x i64]* %arr0)"   --->   Operation 30 'call' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 10 <SV = 9> <Delay = 0.00>
+ST_10 : Operation 31 [2/2] (0.00ns)   --->   "call fastcc void @Loop_l_transp_out_pr(i64* %xk_mid_col_fifo_V, [1024 x i64]* %arr1)"   --->   Operation 31 'call' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 11 <SV = 10> <Delay = 0.00>
+ST_11 : Operation 32 [1/2] (0.00ns)   --->   "call fastcc void @Loop_l_transp_out_pr(i64* %xk_mid_col_fifo_V, [1024 x i64]* %arr1)"   --->   Operation 32 'call' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 12 <SV = 11> <Delay = 0.00>
+ST_12 : Operation 33 [2/2] (0.00ns)   --->   "call fastcc void @Loop_l_wr_o_fifo_pro([1024 x i64]* %arr1, i64* %xk_fifo_V)"   --->   Operation 33 'call' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 13 <SV = 12> <Delay = 0.00>
+ST_13 : Operation 34 [1/2] (0.00ns)   --->   "call fastcc void @Loop_l_wr_o_fifo_pro([1024 x i64]* %arr1, i64* %xk_fifo_V)"   --->   Operation 34 'call' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 14 <SV = 13> <Delay = 0.00>
+ST_14 : Operation 35 [2/2] (0.00ns)   --->   "call fastcc void @Loop_l_wr_xk_proc29(i64* %xk_fifo_V, i64* %xk_data, i1* %xk_last)"   --->   Operation 35 'call' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 15 <SV = 14> <Delay = 0.00>
+ST_15 : Operation 36 [1/2] (0.00ns)   --->   "call fastcc void @Loop_l_wr_xk_proc29(i64* %xk_fifo_V, i64* %xk_data, i1* %xk_last)"   --->   Operation 36 'call' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 16 <SV = 15> <Delay = 0.00>
+ST_16 : Operation 37 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecDataflowPipeline(i32 -1, i32 0, [1 x i8]* @p_str1) nounwind" [fft2d_top.cpp:115]   --->   Operation 37 'specdataflowpipeline' <Predicate = true> <Delay = 0.00>
+ST_16 : Operation 38 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecBitsMap(i64* %xk_data), !map !71"   --->   Operation 38 'specbitsmap' <Predicate = true> <Delay = 0.00>
+ST_16 : Operation 39 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecBitsMap(i64* %xn_data), !map !80"   --->   Operation 39 'specbitsmap' <Predicate = true> <Delay = 0.00>
+ST_16 : Operation 40 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecMemCore([1024 x i64]* %arr1, [1 x i8]* @p_str1, [12 x i8]* @p_str4, [1 x i8]* @p_str1, i32 -1, [1 x i8]* @p_str1, [1 x i8]* @p_str1, [1 x i8]* @p_str1, [1 x i8]* @p_str1, [1 x i8]* @p_str1)" [fft2d_top.cpp:111]   --->   Operation 40 'specmemcore' <Predicate = true> <Delay = 0.00>
+ST_16 : Operation 41 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecMemCore([1024 x i64]* %arr0, [1 x i8]* @p_str1, [12 x i8]* @p_str4, [1 x i8]* @p_str1, i32 -1, [1 x i8]* @p_str1, [1 x i8]* @p_str1, [1 x i8]* @p_str1, [1 x i8]* @p_str1, [1 x i8]* @p_str1)" [fft2d_top.cpp:106]   --->   Operation 41 'specmemcore' <Predicate = true> <Delay = 0.00>
+ST_16 : Operation 42 [1/1] (0.00ns)   --->   "%empty = call i32 (...)* @_ssdm_op_SpecChannel([10 x i8]* @xk_fifo_OC_V_str, i32 1, [1 x i8]* @p_str45, [1 x i8]* @p_str45, i32 32, i32 32, i64* %xk_fifo_V, i64* %xk_fifo_V)"   --->   Operation 42 'specchannel' 'empty' <Predicate = true> <Delay = 0.00>
+ST_16 : Operation 43 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(i64* %xk_fifo_V, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str48, i32 0, i32 0, [1 x i8]* @p_str49, [1 x i8]* @p_str50, [1 x i8]* @p_str51, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str52, [1 x i8]* @p_str53)"   --->   Operation 43 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_16 : Operation 44 [1/1] (0.00ns)   --->   "%empty_7 = call i32 (...)* @_ssdm_op_SpecChannel([18 x i8]* @xk_mid_col_fifo_OC_V, i32 1, [1 x i8]* @p_str54, [1 x i8]* @p_str54, i32 32, i32 32, i64* %xk_mid_col_fifo_V, i64* %xk_mid_col_fifo_V)"   --->   Operation 44 'specchannel' 'empty_7' <Predicate = true> <Delay = 0.00>
+ST_16 : Operation 45 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(i64* %xk_mid_col_fifo_V, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str55, i32 0, i32 0, [1 x i8]* @p_str56, [1 x i8]* @p_str57, [1 x i8]* @p_str58, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str59, [1 x i8]* @p_str60)"   --->   Operation 45 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_16 : Operation 46 [1/1] (0.00ns)   --->   "%empty_8 = call i32 (...)* @_ssdm_op_SpecChannel([18 x i8]* @xk_mid_row_fifo_OC_V, i32 1, [1 x i8]* @p_str61, [1 x i8]* @p_str61, i32 32, i32 32, i64* %xk_mid_row_fifo_V, i64* %xk_mid_row_fifo_V)"   --->   Operation 46 'specchannel' 'empty_8' <Predicate = true> <Delay = 0.00>
+ST_16 : Operation 47 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(i64* %xk_mid_row_fifo_V, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str62, i32 0, i32 0, [1 x i8]* @p_str63, [1 x i8]* @p_str64, [1 x i8]* @p_str65, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str66, [1 x i8]* @p_str67)"   --->   Operation 47 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_16 : Operation 48 [1/1] (0.00ns)   --->   "%empty_9 = call i32 (...)* @_ssdm_op_SpecChannel([10 x i8]* @xn_fifo_OC_V_str, i32 1, [1 x i8]* @p_str68, [1 x i8]* @p_str68, i32 32, i32 32, i64* %xn_fifo_V, i64* %xn_fifo_V)"   --->   Operation 48 'specchannel' 'empty_9' <Predicate = true> <Delay = 0.00>
+ST_16 : Operation 49 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(i64* %xn_fifo_V, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str69, i32 0, i32 0, [1 x i8]* @p_str70, [1 x i8]* @p_str71, [1 x i8]* @p_str72, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str73, [1 x i8]* @p_str74)"   --->   Operation 49 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_16 : Operation 50 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecBitsMap(i1* %xn_last), !map !87"   --->   Operation 50 'specbitsmap' <Predicate = true> <Delay = 0.00>
+ST_16 : Operation 51 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecBitsMap(i1* %xk_last), !map !91"   --->   Operation 51 'specbitsmap' <Predicate = true> <Delay = 0.00>
+ST_16 : Operation 52 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecTopModule([10 x i8]* @fft2d_top_str) nounwind"   --->   Operation 52 'spectopmodule' <Predicate = true> <Delay = 0.00>
+ST_16 : Operation 53 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(i32 0, [13 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str1, i32 0, i32 0, [1 x i8]* @p_str1, [1 x i8]* @p_str1, [1 x i8]* @p_str1, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1, [1 x i8]* @p_str1) nounwind" [fft2d_top.cpp:75]   --->   Operation 53 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_16 : Operation 54 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(i64* %xn_data, i1* %xn_last, [5 x i8]* @p_str2, i32 1, i32 1, [5 x i8]* @p_str3, i32 0, i32 1024, [1 x i8]* @p_str1, [1 x i8]* @p_str1, [1 x i8]* @p_str1, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1, [1 x i8]* @p_str1)" [fft2d_top.cpp:76]   --->   Operation 54 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_16 : Operation 55 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(i64* %xk_data, i1* %xk_last, [5 x i8]* @p_str2, i32 1, i32 1, [5 x i8]* @p_str3, i32 0, i32 1024, [1 x i8]* @p_str1, [1 x i8]* @p_str1, [1 x i8]* @p_str1, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1, [1 x i8]* @p_str1)" [fft2d_top.cpp:77]   --->   Operation 55 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_16 : Operation 56 [1/1] (0.00ns)   --->   "ret void" [fft2d_top.cpp:206]   --->   Operation 56 'ret' <Predicate = true> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 2.5ns, clock uncertainty: 0.312ns.
+
+ <State 1>: 0ns
+The critical path consists of the following:
+
+ <State 2>: 0ns
+The critical path consists of the following:
+
+ <State 3>: 0ns
+The critical path consists of the following:
+
+ <State 4>: 0ns
+The critical path consists of the following:
+
+ <State 5>: 0ns
+The critical path consists of the following:
+
+ <State 6>: 0ns
+The critical path consists of the following:
+
+ <State 7>: 0ns
+The critical path consists of the following:
+
+ <State 8>: 0ns
+The critical path consists of the following:
+
+ <State 9>: 0ns
+The critical path consists of the following:
+
+ <State 10>: 0ns
+The critical path consists of the following:
+
+ <State 11>: 0ns
+The critical path consists of the following:
+
+ <State 12>: 0ns
+The critical path consists of the following:
+
+ <State 13>: 0ns
+The critical path consists of the following:
+
+ <State 14>: 0ns
+The critical path consists of the following:
+
+ <State 15>: 0ns
+The critical path consists of the following:
+
+ <State 16>: 0ns
+The critical path consists of the following:
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+	State 5
+	State 6
+	State 7
+	State 8
+	State 9
+	State 10
+	State 11
+	State 12
+	State 13
+	State 14
+	State 15
+	State 16
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

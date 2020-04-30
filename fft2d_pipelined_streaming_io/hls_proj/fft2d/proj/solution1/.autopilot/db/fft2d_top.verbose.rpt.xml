@@ -1,0 +1,130 @@
+<profile>
+
+<section name = "Vivado HLS Report for 'fft2d_top'" level="0">
+<item name = "Date">Fri May  1 00:15:33 2020
+</item>
+<item name = "Version">2019.1 (Build 2552052 on Fri May 24 15:28:33 MDT 2019)</item>
+<item name = "Project">proj</item>
+<item name = "Solution">solution1</item>
+<item name = "Product family">zynquplus</item>
+<item name = "Target device">xczu7ev-ffvc1156-2-e</item>
+</section>
+
+<section name = "Performance Estimates" level="0">
+<item name = "Timing (ns)">
+<section name = "" level="1">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="4">Clock, Target, Estimated, Uncertainty</keys>
+<column name="ap_clk">2.50, 2.188, 0.31</column>
+</table>
+</item>
+</section>
+</item>
+<item name = "Latency (clock cycles)">
+<section name = "" level="1">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="6">, min, max, min, max, Type</keys>
+<column name="">17299, 17299, 8898, 8898, dataflow</column>
+</table>
+</item>
+<item name = "Detail">
+<section name = "" level="1">
+<item name = "Instance"><table name="" hasTotal="0">
+<keys size="7">Instance, Module, min, max, min, max, Type</keys>
+<column name="Loop_l_f1d_col_proc2_U0">Loop_l_f1d_col_proc2, 8897, 8897, 8897, 8897, none</column>
+<column name="Loop_l_f1d_row_proc2_U0">Loop_l_f1d_row_proc2, 6849, 6849, 6849, 6849, none</column>
+<column name="Loop_l_wr_o_fifo_pro_U0">Loop_l_wr_o_fifo_pro, 1028, 1028, 1028, 1028, none</column>
+<column name="Loop_l_transp_mid_pr_U0">Loop_l_transp_mid_pr, 1027, 1027, 1027, 1027, none</column>
+<column name="Loop_l_transp_out_pr_U0">Loop_l_transp_out_pr, 1027, 1027, 1027, 1027, none</column>
+<column name="Loop_l_wr_xk_proc29_U0">Loop_l_wr_xk_proc29, 1027, 1027, 1027, 1027, none</column>
+<column name="Loop_l_rd_xn_proc23_U0">Loop_l_rd_xn_proc23, 1026, 1026, 1026, 1026, none</column>
+</table>
+</item>
+<item name = "Loop"><table name="" hasTotal="0">
+<keys size="8">Loop Name, min, max, Latency, achieved, target, Count, Pipelined</keys>
+</table>
+</item>
+</section>
+</item>
+</section>
+</item>
+</section>
+
+<section name = "Utilization Estimates" level="0">
+<item name = "Summary"><table name="" hasTotal="1">
+<keys size="6">Name, BRAM_18K, DSP48E, FF, LUT, URAM</keys>
+<column name="DSP">-, -, -, -, -</column>
+<column name="Expression">-, -, -, -, -</column>
+<column name="FIFO">16, -, 324, 296, -</column>
+<column name="Instance">28, 0, 15606, 13084, -</column>
+<column name="Memory">0, -, 0, 0, 2</column>
+<column name="Multiplexer">-, -, -, -, -</column>
+<column name="Register">-, -, -, -, -</column>
+<specialColumn name="Available">624, 1728, 460800, 230400, 96</specialColumn>
+<specialColumn name="Utilization (%)">7, 0, 3, 5, 2</specialColumn>
+</table>
+</item>
+<item name = "Detail">
+<section name = "" level="1">
+<item name = "Instance"><table name="" hasTotal="1">
+<keys size="7">Instance, Module, BRAM_18K, DSP48E, FF, LUT, URAM</keys>
+<column name="Loop_l_f1d_col_proc2_U0">Loop_l_f1d_col_proc2, 14, 0, 7447, 6023, 0</column>
+<column name="Loop_l_f1d_row_proc2_U0">Loop_l_f1d_row_proc2, 14, 0, 7370, 6006, 0</column>
+<column name="Loop_l_rd_xn_proc23_U0">Loop_l_rd_xn_proc23, 0, 0, 217, 175, 0</column>
+<column name="Loop_l_transp_mid_pr_U0">Loop_l_transp_mid_pr, 0, 0, 118, 213, 0</column>
+<column name="Loop_l_transp_out_pr_U0">Loop_l_transp_out_pr, 0, 0, 118, 213, 0</column>
+<column name="Loop_l_wr_o_fifo_pro_U0">Loop_l_wr_o_fifo_pro, 0, 0, 177, 245, 0</column>
+<column name="Loop_l_wr_xk_proc29_U0">Loop_l_wr_xk_proc29, 0, 0, 159, 209, 0</column>
+</table>
+</item>
+<item name = "DSP48E"><table name="" hasTotal="0">
+<keys size="3">Instance, Module, Expression</keys>
+</table>
+</item>
+<item name = "Memory"><table name="" hasTotal="1">
+<keys size="10">Memory, Module, BRAM_18K, FF, LUT, URAM, Words, Bits, Banks, W*Bits*Banks</keys>
+<column name="arr1_U">fft2d_top_arr1, 0, 0, 0, 1, 1024, 64, 2, 131072</column>
+<column name="arr0_U">fft2d_top_arr1, 0, 0, 0, 1, 1024, 64, 2, 131072</column>
+</table>
+</item>
+<item name = "FIFO"><table name="" hasTotal="1">
+<keys size="8">Name, BRAM_18K, FF, LUT, URAM, Depth, Bits, Size:D*B</keys>
+<column name="xk_fifo_V_U">4, 81, 0, -, 32, 64, 2048</column>
+<column name="xk_mid_col_fifo_V_U">4, 81, 0, -, 32, 64, 2048</column>
+<column name="xk_mid_row_fifo_V_U">4, 81, 0, -, 32, 64, 2048</column>
+<column name="xn_fifo_V_U">4, 81, 0, -, 32, 64, 2048</column>
+</table>
+</item>
+<item name = "Expression"><table name="" hasTotal="1">
+<keys size="7">Variable Name, Operation, DSP48E, FF, LUT, Bitwidth P0, Bitwidth P1</keys>
+</table>
+</item>
+<item name = "Multiplexer"><table name="" hasTotal="1">
+<keys size="5">Name, LUT, Input Size, Bits, Total Bits</keys>
+</table>
+</item>
+<item name = "Register"><table name="" hasTotal="1">
+<keys size="5">Name, FF, LUT, Bits, Const Bits</keys>
+</table>
+</item>
+</section>
+</item>
+</section>
+
+<section name = "Interface" level="0">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="6">RTL Ports, Dir, Bits, Protocol, Source Object, C Type</keys>
+<column name="ap_clk">in, 1, ap_ctrl_none, fft2d_top, return value</column>
+<column name="ap_rst_n">in, 1, ap_ctrl_none, fft2d_top, return value</column>
+<column name="xn_TDATA">in, 64, axis, xn_data, pointer</column>
+<column name="xn_TLAST">in, 1, axis, xn_last, pointer</column>
+<column name="xn_TVALID">in, 1, axis, xn_last, pointer</column>
+<column name="xn_TREADY">out, 1, axis, xn_last, pointer</column>
+<column name="xk_TDATA">out, 64, axis, xk_data, pointer</column>
+<column name="xk_TLAST">out, 1, axis, xk_last, pointer</column>
+<column name="xk_TVALID">out, 1, axis, xk_last, pointer</column>
+<column name="xk_TREADY">in, 1, axis, xk_last, pointer</column>
+</table>
+</item>
+</section>
+</profile>

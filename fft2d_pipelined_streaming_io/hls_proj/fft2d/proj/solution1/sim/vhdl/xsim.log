@@ -1,0 +1,72 @@
+#-----------------------------------------------------------
+# xsim v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:47:09 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Fri May  1 00:19:55 2020
+# Process ID: 5551
+# Current directory: /home/erhan/workspace/Xilinx/Vivado_HLS_2019.1/fft2d/proj/solution1/sim/vhdl
+# Command line: xsim -mode tcl -source {xsim.dir/fft2d_top/xsim_script.tcl}
+# Log file: /home/erhan/workspace/Xilinx/Vivado_HLS_2019.1/fft2d/proj/solution1/sim/vhdl/xsim.log
+# Journal file: /home/erhan/workspace/Xilinx/Vivado_HLS_2019.1/fft2d/proj/solution1/sim/vhdl/xsim.jou
+#-----------------------------------------------------------
+source xsim.dir/fft2d_top/xsim_script.tcl
+# xsim {fft2d_top} -autoloadwcfg -tclbatch {fft2d_top.tcl}
+Vivado Simulator 2019.1
+Time resolution is 1 ps
+source fft2d_top.tcl
+## log_wave -r /
+WARNING: [Simtcl 6-197] One or more HDL objects could not be logged because of object type or size limitations.  To see details please rerun the command with -verbose (-v).
+## set designtopgroup [add_wave_group "Design Top Signals"]
+## set coutputgroup [add_wave_group "C Outputs" -into $designtopgroup]
+## set xk_group [add_wave_group xk(axis) -into $coutputgroup]
+## add_wave /apatb_fft2d_top_top/AESL_inst_fft2d_top/xk_TREADY -into $xk_group -color #ffff00 -radix hex
+## add_wave /apatb_fft2d_top_top/AESL_inst_fft2d_top/xk_TVALID -into $xk_group -color #ffff00 -radix hex
+## add_wave /apatb_fft2d_top_top/AESL_inst_fft2d_top/xk_TLAST -into $xk_group -color #ffff00 -radix hex
+## add_wave /apatb_fft2d_top_top/AESL_inst_fft2d_top/xk_TDATA -into $xk_group -radix hex
+## set cinputgroup [add_wave_group "C Inputs" -into $designtopgroup]
+## set xn_group [add_wave_group xn(axis) -into $cinputgroup]
+## add_wave /apatb_fft2d_top_top/AESL_inst_fft2d_top/xn_TREADY -into $xn_group -color #ffff00 -radix hex
+## add_wave /apatb_fft2d_top_top/AESL_inst_fft2d_top/xn_TVALID -into $xn_group -color #ffff00 -radix hex
+## add_wave /apatb_fft2d_top_top/AESL_inst_fft2d_top/xn_TLAST -into $xn_group -color #ffff00 -radix hex
+## add_wave /apatb_fft2d_top_top/AESL_inst_fft2d_top/xn_TDATA -into $xn_group -radix hex
+## set resetgroup [add_wave_group "Reset" -into $designtopgroup]
+## add_wave /apatb_fft2d_top_top/AESL_inst_fft2d_top/ap_rst_n -into $resetgroup
+## set clockgroup [add_wave_group "Clock" -into $designtopgroup]
+## add_wave /apatb_fft2d_top_top/AESL_inst_fft2d_top/ap_clk -into $clockgroup
+## set testbenchgroup [add_wave_group "Test Bench Signals"]
+## set tbinternalsiggroup [add_wave_group "Internal Signals" -into $testbenchgroup]
+## set tb_simstatus_group [add_wave_group "Simulation Status" -into $tbinternalsiggroup]
+## set tb_portdepth_group [add_wave_group "Port Depth" -into $tbinternalsiggroup]
+## add_wave /apatb_fft2d_top_top/AUTOTB_TRANSACTION_NUM -into $tb_simstatus_group -radix hex
+## add_wave /apatb_fft2d_top_top/ready_cnt -into $tb_simstatus_group -radix hex
+## add_wave /apatb_fft2d_top_top/done_cnt -into $tb_simstatus_group -radix hex
+## add_wave /apatb_fft2d_top_top/ap_c_n_tvin_trans_num_xn_data -into $tb_simstatus_group -radix hex
+## add_wave /apatb_fft2d_top_top/ap_c_n_tvin_trans_num_xn_last -into $tb_simstatus_group -radix hex
+## add_wave /apatb_fft2d_top_top/ap_c_n_tvout_trans_num_xk_data -into $tb_simstatus_group -radix hex
+## add_wave /apatb_fft2d_top_top/ap_c_n_tvout_trans_num_xk_last -into $tb_simstatus_group -radix hex
+## add_wave /apatb_fft2d_top_top/LENGTH_xn_data -into $tb_portdepth_group -radix hex
+## add_wave /apatb_fft2d_top_top/LENGTH_xn_last -into $tb_portdepth_group -radix hex
+## add_wave /apatb_fft2d_top_top/LENGTH_xk_data -into $tb_portdepth_group -radix hex
+## add_wave /apatb_fft2d_top_top/LENGTH_xk_last -into $tb_portdepth_group -radix hex
+## set tbcoutputgroup [add_wave_group "C Outputs" -into $testbenchgroup]
+## set tb_xk_group [add_wave_group xk(axis) -into $tbcoutputgroup]
+## add_wave /apatb_fft2d_top_top/xk_TREADY -into $tb_xk_group -color #ffff00 -radix hex
+## add_wave /apatb_fft2d_top_top/xk_TVALID -into $tb_xk_group -color #ffff00 -radix hex
+## add_wave /apatb_fft2d_top_top/xk_TLAST -into $tb_xk_group -color #ffff00 -radix hex
+## add_wave /apatb_fft2d_top_top/xk_TDATA -into $tb_xk_group -radix hex
+## set tbcinputgroup [add_wave_group "C Inputs" -into $testbenchgroup]
+## set tb_xn_group [add_wave_group xn(axis) -into $tbcinputgroup]
+## add_wave /apatb_fft2d_top_top/xn_TREADY -into $tb_xn_group -color #ffff00 -radix hex
+## add_wave /apatb_fft2d_top_top/xn_TVALID -into $tb_xn_group -color #ffff00 -radix hex
+## add_wave /apatb_fft2d_top_top/xn_TLAST -into $tb_xn_group -color #ffff00 -radix hex
+## add_wave /apatb_fft2d_top_top/xn_TDATA -into $tb_xn_group -radix hex
+## save_wave_config fft2d_top.wcfg
+## run all
+Note: simulation done!
+Time: 130823750 ps  Iteration: 1  Process: /apatb_fft2d_top_top/generate_sim_done_proc  File: /home/erhan/workspace/Xilinx/Vivado_HLS_2019.1/fft2d/proj/solution1/sim/vhdl/fft2d_top.autotb.vhd
+Failure: NORMAL EXIT (note: failure is to force the simulator to stop)
+Time: 130823750 ps  Iteration: 1  Process: /apatb_fft2d_top_top/generate_sim_done_proc  File: /home/erhan/workspace/Xilinx/Vivado_HLS_2019.1/fft2d/proj/solution1/sim/vhdl/fft2d_top.autotb.vhd
+$finish called at time : 130823750 ps
+run: Time (s): cpu = 00:00:01 ; elapsed = 00:02:51 . Memory (MB): peak = 1523.805 ; gain = 72.004 ; free physical = 330 ; free virtual = 83742
+## quit
+INFO: [Common 17-206] Exiting xsim at Fri May  1 00:22:55 2020...

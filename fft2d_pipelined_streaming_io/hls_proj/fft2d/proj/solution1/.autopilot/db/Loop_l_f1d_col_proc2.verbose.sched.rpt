@@ -1,0 +1,187 @@
+
+
+================================================================
+== Vivado HLS Report for 'Loop_l_f1d_col_proc2'
+================================================================
+* Date:           Fri May  1 00:15:23 2020
+
+* Version:        2019.1 (Build 2552052 on Fri May 24 15:28:33 MDT 2019)
+* Project:        proj
+* Solution:       solution1
+* Product family: zynquplus
+* Target device:  xczu7ev-ffvc1156-2-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing (ns): 
+    * Summary: 
+    +--------+-------+----------+------------+
+    |  Clock | Target| Estimated| Uncertainty|
+    +--------+-------+----------+------------+
+    |ap_clk  |   2.50|     2.188|        0.31|
+    +--------+-------+----------+------------+
+
++ Latency (clock cycles): 
+    * Summary: 
+    +------+------+------+------+---------+
+    |   Latency   |   Interval  | Pipeline|
+    |  min |  max |  min |  max |   Type  |
+    +------+------+------+------+---------+
+    |  8897|  8897|  8897|  8897|   none  |
+    +------+------+------+------+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +----------------+------+------+----------+-----------+-----------+------+----------+
+        |                |   Latency   | Iteration|  Initiation Interval  | Trip |          |
+        |    Loop Name   |  min |  max |  Latency |  achieved |   target  | Count| Pipelined|
+        +----------------+------+------+----------+-----------+-----------+------+----------+
+        |- l_f1d_col     |  8896|  8896|       278|          -|          -|    32|    no    |
+        | + l_f1d_col.1  |    96|    96|         3|          -|          -|    32|    no    |
+        +----------------+------+------+----------+-----------+-----------+------+----------+
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 2
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 0
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 6
+* Pipeline : 0
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 2 
+2 --> 3 
+3 --> 4 6 
+4 --> 5 
+5 --> 3 
+6 --> 2 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 0.65>
+ST_1 : Operation 7 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecMemCore([1024 x i64]* %arr0, [1 x i8]* @p_str1, [12 x i8]* @p_str4, [1 x i8]* @p_str1, i32 -1, [1 x i8]* @p_str1, [1 x i8]* @p_str1, [1 x i8]* @p_str1, [1 x i8]* @p_str1, [1 x i8]* @p_str1)"   --->   Operation 7 'specmemcore' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 8 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(i64* %xk_mid_col_fifo_V, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str55, i32 0, i32 0, [1 x i8]* @p_str56, [1 x i8]* @p_str57, [1 x i8]* @p_str58, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str59, [1 x i8]* @p_str60)"   --->   Operation 8 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 9 [1/1] (0.00ns)   --->   "%xn_mid_col_fifo_V = alloca i64, align 8" [fft2d_top.cpp:93]   --->   Operation 9 'alloca' 'xn_mid_col_fifo_V' <Predicate = true> <Delay = 0.00> <Core = "FIFO">   --->   Core 32 'FIFO' <Latency = 0> <II = 1> <Delay = 1.63> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 64> <Depth = 32> <FIFO>
+ST_1 : Operation 10 [1/1] (0.00ns)   --->   "%empty = call i32 (...)* @_ssdm_op_SpecChannel([19 x i8]* @xn_mid_col_fifo_OC_V, i32 1, [1 x i8]* @p_str96, [1 x i8]* @p_str96, i32 32, i32 32, i64* %xn_mid_col_fifo_V, i64* %xn_mid_col_fifo_V)"   --->   Operation 10 'specchannel' 'empty' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 11 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(i64* %xn_mid_col_fifo_V, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str97, i32 0, i32 0, [1 x i8]* @p_str98, [1 x i8]* @p_str99, [1 x i8]* @p_str100, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str101, [1 x i8]* @p_str102)"   --->   Operation 11 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 12 [1/1] (0.65ns)   --->   "br label %.preheader35"   --->   Operation 12 'br' <Predicate = true> <Delay = 0.65>
+
+State 2 <SV = 1> <Delay = 0.78>
+ST_2 : Operation 13 [1/1] (0.00ns)   --->   "%i4_0 = phi i6 [ %i, %l_f1d_col_end ], [ 0, %newFuncRoot ]"   --->   Operation 13 'phi' 'i4_0' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 14 [1/1] (0.78ns)   --->   "%icmp_ln155 = icmp eq i6 %i4_0, -32" [fft2d_top.cpp:155]   --->   Operation 14 'icmp' 'icmp_ln155' <Predicate = true> <Delay = 0.78> <Core = "Cmp">   --->   Core 25 'Cmp' <Latency = 0> <II = 1> <Delay = 0.78> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 15 [1/1] (0.00ns)   --->   "%empty_47 = call i32 (...)* @_ssdm_op_SpecLoopTripCount(i64 32, i64 32, i64 32)"   --->   Operation 15 'speclooptripcount' 'empty_47' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 16 [1/1] (0.78ns)   --->   "%i = add i6 %i4_0, 1" [fft2d_top.cpp:155]   --->   Operation 16 'add' 'i' <Predicate = true> <Delay = 0.78> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 0.78> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 17 [1/1] (0.00ns)   --->   "br i1 %icmp_ln155, label %.preheader34.exitStub, label %l_f1d_col_begin" [fft2d_top.cpp:155]   --->   Operation 17 'br' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 18 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecLoopName([10 x i8]* @p_str9) nounwind" [fft2d_top.cpp:156]   --->   Operation 18 'specloopname' <Predicate = (!icmp_ln155)> <Delay = 0.00>
+ST_2 : Operation 19 [1/1] (0.00ns)   --->   "%tmp_s = call i32 (...)* @_ssdm_op_SpecRegionBegin([10 x i8]* @p_str9)" [fft2d_top.cpp:156]   --->   Operation 19 'specregionbegin' 'tmp_s' <Predicate = (!icmp_ln155)> <Delay = 0.00>
+ST_2 : Operation 20 [1/1] (0.00ns)   --->   "%trunc_ln159 = trunc i6 %i4_0 to i5" [fft2d_top.cpp:159]   --->   Operation 20 'trunc' 'trunc_ln159' <Predicate = (!icmp_ln155)> <Delay = 0.00>
+ST_2 : Operation 21 [1/1] (0.00ns)   --->   "%shl_ln = call i10 @_ssdm_op_BitConcatenate.i10.i5.i5(i5 %trunc_ln159, i5 0)" [fft2d_top.cpp:159]   --->   Operation 21 'bitconcatenate' 'shl_ln' <Predicate = (!icmp_ln155)> <Delay = 0.00>
+ST_2 : Operation 22 [1/1] (0.65ns)   --->   "br label %0" [fft2d_top.cpp:157]   --->   Operation 22 'br' <Predicate = (!icmp_ln155)> <Delay = 0.65>
+ST_2 : Operation 23 [1/1] (0.00ns)   --->   "ret void"   --->   Operation 23 'ret' <Predicate = (icmp_ln155)> <Delay = 0.00>
+
+State 3 <SV = 2> <Delay = 2.02>
+ST_3 : Operation 24 [1/1] (0.00ns)   --->   "%j5_0 = phi i6 [ 0, %l_f1d_col_begin ], [ %j, %1 ]"   --->   Operation 24 'phi' 'j5_0' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 25 [1/1] (0.78ns)   --->   "%icmp_ln157 = icmp eq i6 %j5_0, -32" [fft2d_top.cpp:157]   --->   Operation 25 'icmp' 'icmp_ln157' <Predicate = true> <Delay = 0.78> <Core = "Cmp">   --->   Core 25 'Cmp' <Latency = 0> <II = 1> <Delay = 0.78> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 26 [1/1] (0.00ns)   --->   "%empty_49 = call i32 (...)* @_ssdm_op_SpecLoopTripCount(i64 32, i64 32, i64 32)"   --->   Operation 26 'speclooptripcount' 'empty_49' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 27 [1/1] (0.78ns)   --->   "%j = add i6 %j5_0, 1" [fft2d_top.cpp:157]   --->   Operation 27 'add' 'j' <Predicate = true> <Delay = 0.78> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 0.78> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 28 [1/1] (0.00ns)   --->   "br i1 %icmp_ln157, label %l_f1d_col_end, label %1" [fft2d_top.cpp:157]   --->   Operation 28 'br' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 29 [1/1] (0.00ns)   --->   "%zext_ln159 = zext i6 %j5_0 to i10" [fft2d_top.cpp:159]   --->   Operation 29 'zext' 'zext_ln159' <Predicate = (!icmp_ln157)> <Delay = 0.00>
+ST_3 : Operation 30 [1/1] (0.78ns)   --->   "%index = add i10 %shl_ln, %zext_ln159" [fft2d_top.cpp:159]   --->   Operation 30 'add' 'index' <Predicate = (!icmp_ln157)> <Delay = 0.78> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 0.78> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 31 [1/1] (0.00ns)   --->   "%zext_ln160 = zext i10 %index to i64" [fft2d_top.cpp:160]   --->   Operation 31 'zext' 'zext_ln160' <Predicate = (!icmp_ln157)> <Delay = 0.00>
+ST_3 : Operation 32 [1/1] (0.00ns)   --->   "%arr0_addr = getelementptr [1024 x i64]* %arr0, i64 0, i64 %zext_ln160" [fft2d_top.cpp:160]   --->   Operation 32 'getelementptr' 'arr0_addr' <Predicate = (!icmp_ln157)> <Delay = 0.00>
+ST_3 : Operation 33 [2/2] (1.23ns)   --->   "%tmp_4 = load i64* %arr0_addr, align 8" [fft2d_top.cpp:160]   --->   Operation 33 'load' 'tmp_4' <Predicate = (!icmp_ln157)> <Delay = 1.23> <Core = "RAM_2P_URAM">   --->   Core 43 'RAM_2P_URAM' <Latency = 1> <II = 1> <Delay = 1.23> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 64> <Depth = 1024> <RAM>
+ST_3 : Operation 34 [2/2] (0.00ns)   --->   "call fastcc void @fft1d.0(i64* %xn_mid_col_fifo_V, i64* %xk_mid_col_fifo_V)" [fft2d_top.cpp:163]   --->   Operation 34 'call' <Predicate = (icmp_ln157)> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 4 <SV = 3> <Delay = 1.23>
+ST_4 : Operation 35 [1/2] (1.23ns)   --->   "%tmp_4 = load i64* %arr0_addr, align 8" [fft2d_top.cpp:160]   --->   Operation 35 'load' 'tmp_4' <Predicate = true> <Delay = 1.23> <Core = "RAM_2P_URAM">   --->   Core 43 'RAM_2P_URAM' <Latency = 1> <II = 1> <Delay = 1.23> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 64> <Depth = 1024> <RAM>
+
+State 5 <SV = 4> <Delay = 1.09>
+ST_5 : Operation 36 [1/1] (1.09ns)   --->   "call void @_ssdm_op_Write.ap_fifo.volatile.i64P(i64* %xn_mid_col_fifo_V, i64 %tmp_4)" [fft2d_top.cpp:160]   --->   Operation 36 'write' <Predicate = true> <Delay = 1.09> <Core = "FIFO">   --->   Core 32 'FIFO' <Latency = 0> <II = 1> <Delay = 1.63> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 64> <Depth = 32> <FIFO>
+ST_5 : Operation 37 [1/1] (0.00ns)   --->   "br label %0" [fft2d_top.cpp:157]   --->   Operation 37 'br' <Predicate = true> <Delay = 0.00>
+
+State 6 <SV = 3> <Delay = 0.00>
+ST_6 : Operation 38 [1/2] (0.00ns)   --->   "call fastcc void @fft1d.0(i64* %xn_mid_col_fifo_V, i64* %xk_mid_col_fifo_V)" [fft2d_top.cpp:163]   --->   Operation 38 'call' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_6 : Operation 39 [1/1] (0.00ns)   --->   "%empty_48 = call i32 (...)* @_ssdm_op_SpecRegionEnd([10 x i8]* @p_str9, i32 %tmp_s)" [fft2d_top.cpp:165]   --->   Operation 39 'specregionend' 'empty_48' <Predicate = true> <Delay = 0.00>
+ST_6 : Operation 40 [1/1] (0.00ns)   --->   "br label %.preheader35" [fft2d_top.cpp:155]   --->   Operation 40 'br' <Predicate = true> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 2.5ns, clock uncertainty: 0.312ns.
+
+ <State 1>: 0.656ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation ('i') with incoming values : ('i', fft2d_top.cpp:155) [10]  (0.656 ns)
+
+ <State 2>: 0.785ns
+The critical path consists of the following:
+	'phi' operation ('i') with incoming values : ('i', fft2d_top.cpp:155) [10]  (0 ns)
+	'icmp' operation ('icmp_ln155', fft2d_top.cpp:155) [11]  (0.785 ns)
+
+ <State 3>: 2.02ns
+The critical path consists of the following:
+	'phi' operation ('j') with incoming values : ('j', fft2d_top.cpp:157) [22]  (0 ns)
+	'add' operation ('index', fft2d_top.cpp:159) [29]  (0.787 ns)
+	'getelementptr' operation ('arr0_addr', fft2d_top.cpp:160) [31]  (0 ns)
+	'load' operation ('tmp.4', fft2d_top.cpp:160) on array 'arr0' [32]  (1.24 ns)
+
+ <State 4>: 1.24ns
+The critical path consists of the following:
+	'load' operation ('tmp.4', fft2d_top.cpp:160) on array 'arr0' [32]  (1.24 ns)
+
+ <State 5>: 1.09ns
+The critical path consists of the following:
+	fifo write on port 'xn_mid_col_fifo.V', fft2d_top.cpp:93 (fft2d_top.cpp:160) [33]  (1.09 ns)
+
+ <State 6>: 0ns
+The critical path consists of the following:
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+	State 5
+	State 6
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

@@ -1,0 +1,1100 @@
+{
+  "Top": "fft2d_top",
+  "RtlTop": "fft2d_top",
+  "RtlPrefix": "",
+  "SourceLanguage": "cpp",
+  "ResetStyle": "control",
+  "GenerateBdFiles": "1",
+  "HostMachineBits": "64",
+  "Target": {
+    "Family": "zynquplus",
+    "Device": "xczu7ev",
+    "Package": "-ffvc1156",
+    "Speed": "-2-e"
+  },
+  "HlsSolution": {"Config": [
+      "config_sdx -target=none",
+      "config_export -description {HLS 2D FFT IP}",
+      "config_export -display_name=fft2d_processor",
+      "config_export -format=ip_catalog",
+      "config_export -rtl=vhdl",
+      "config_export -use_netlist=none",
+      "config_export -vendor=EA",
+      "config_export -version=1.0",
+      "config_export -vivado_optimization_level=2",
+      "config_export -vivado_phys_opt=all",
+      "config_export -vivado_report_level=0"
+    ]},
+  "Args": {
+    "xn": {
+      "index": "0",
+      "type": {
+        "kinds": [
+          "struct",
+          "array"
+        ],
+        "dataType": "AXIS_t",
+        "arraySizes": ["1024"],
+        "structImpl": "flat-field",
+        "dataPack": true,
+        "fields": {
+          "data": {
+            "order": "0",
+            "kinds": ["struct"],
+            "dataType": "DATA_t",
+            "portRef": "TDATA",
+            "structImpl": "interface",
+            "dataPack": true,
+            "fields": {
+              "real": {
+                "order": "0",
+                "dataType": "float",
+                "dataWidth": "32",
+                "interfaceRef": "xn",
+                "bitMap": "31:0",
+                "portRef": "TDATA",
+                "structImpl": "field",
+                "dataPack": true
+              },
+              "imag": {
+                "order": "1",
+                "dataType": "float",
+                "dataWidth": "32",
+                "interfaceRef": "xn",
+                "bitMap": "63:32",
+                "portRef": "TDATA",
+                "structImpl": "field",
+                "dataPack": true
+              }
+            }
+          },
+          "last": {
+            "order": "1",
+            "dataType": "bool",
+            "dataWidth": "1",
+            "interfaceRef": "xn",
+            "bitMap": "0:0",
+            "portRef": "TDATA",
+            "structImpl": "field",
+            "dataPack": true
+          }
+        }
+      }
+    },
+    "xk": {
+      "index": "1",
+      "type": {
+        "kinds": [
+          "struct",
+          "array"
+        ],
+        "dataType": "AXIS_t",
+        "arraySizes": ["1024"],
+        "structImpl": "flat-field",
+        "dataPack": true,
+        "fields": {
+          "data": {
+            "order": "0",
+            "kinds": ["struct"],
+            "dataType": "DATA_t",
+            "portRef": "TDATA",
+            "structImpl": "interface",
+            "dataPack": true,
+            "fields": {
+              "real": {
+                "order": "0",
+                "dataType": "float",
+                "dataWidth": "32",
+                "interfaceRef": "xk",
+                "bitMap": "31:0",
+                "portRef": "TDATA",
+                "structImpl": "field",
+                "dataPack": true
+              },
+              "imag": {
+                "order": "1",
+                "dataType": "float",
+                "dataWidth": "32",
+                "interfaceRef": "xk",
+                "bitMap": "63:32",
+                "portRef": "TDATA",
+                "structImpl": "field",
+                "dataPack": true
+              }
+            }
+          },
+          "last": {
+            "order": "1",
+            "dataType": "bool",
+            "dataWidth": "1",
+            "interfaceRef": "xk",
+            "bitMap": "0:0",
+            "portRef": "TDATA",
+            "structImpl": "field",
+            "dataPack": true
+          }
+        }
+      }
+    }
+  },
+  "Return": {
+    
+  },
+  "ClockInfo": {
+    "ClockName": "ap_clk",
+    "ClockPeriod": "2.5",
+    "IsCombLogic": "0",
+    "II": "x",
+    "Latency": "17299",
+    "Uncertainty": "0.312"
+  },
+  "Xdc": {"OocClocks": ["create_clock -name ap_clk -period 2.500 [get_ports ap_clk]"]},
+  "Ipx": {
+    "Vendor": "EA",
+    "Library": "hls",
+    "Name": "fft2d_top",
+    "Version": "1.0",
+    "DisplayName": "fft2d_processor",
+    "Revision": "",
+    "Description": "HLS 2D FFT IP",
+    "Taxonomy": "\/VIVADO_HLS_IP",
+    "AutoFamilySupport": ""
+  },
+  "Files": {
+    "CSource": ["..\/..\/fft2d_top.cpp"],
+    "Vhdl": [
+      "impl\/vhdl\/fft1d_0.vhd",
+      "impl\/vhdl\/fft1d_0_Block_codeRe.vhd",
+      "impl\/vhdl\/fft1d_0_Loop_1_proc2.vhd",
+      "impl\/vhdl\/fft1d_0_Loop_2_proc2.vhd",
+      "impl\/vhdl\/fft1d_1.vhd",
+      "impl\/vhdl\/fft1d_1_Block_codeRe.vhd",
+      "impl\/vhdl\/fft1d_1_Loop_1_proc1.vhd",
+      "impl\/vhdl\/fft1d_1_Loop_2_proc2.vhd",
+      "impl\/vhdl\/fft2d_top_arr1.vhd",
+      "impl\/vhdl\/fft2d_top_arr1_memcore.vhd",
+      "impl\/vhdl\/fft_configuration_1.vhd",
+      "impl\/vhdl\/fft_configuration_s.vhd",
+      "impl\/vhdl\/fifo_w8_d2_A.vhd",
+      "impl\/vhdl\/fifo_w8_d2_A_x.vhd",
+      "impl\/vhdl\/fifo_w64_d32_A.vhd",
+      "impl\/vhdl\/fifo_w64_d32_A_x.vhd",
+      "impl\/vhdl\/fifo_w64_d32_A_x0.vhd",
+      "impl\/vhdl\/fifo_w64_d32_A_x1.vhd",
+      "impl\/vhdl\/fifo_w64_d32_A_x2.vhd",
+      "impl\/vhdl\/Loop_l_f1d_col_proc2.vhd",
+      "impl\/vhdl\/Loop_l_f1d_row_proc2.vhd",
+      "impl\/vhdl\/Loop_l_rd_xn_proc23.vhd",
+      "impl\/vhdl\/Loop_l_transp_mid_pr.vhd",
+      "impl\/vhdl\/Loop_l_transp_out_pr.vhd",
+      "impl\/vhdl\/Loop_l_wr_o_fifo_pro.vhd",
+      "impl\/vhdl\/Loop_l_wr_xk_proc29.vhd",
+      "impl\/vhdl\/start_for_fft1d_0_Loop_2_proc2_U0.vhd",
+      "impl\/vhdl\/start_for_fft1d_1_Loop_2_proc2_U0.vhd",
+      "impl\/vhdl\/start_for_fft_configuration_1_U0.vhd",
+      "impl\/vhdl\/start_for_fft_configuration_U0.vhd",
+      "impl\/vhdl\/start_for_Loop_l_f1d_row_proc2_U0.vhd",
+      "impl\/vhdl\/start_for_Loop_l_transp_mid_pr_U0.vhd",
+      "impl\/vhdl\/start_for_Loop_l_transp_out_pr_U0.vhd",
+      "impl\/vhdl\/start_for_Loop_l_wr_xk_proc29_U0.vhd",
+      "impl\/vhdl\/fft2d_top.vhd"
+    ],
+    "Verilog": [
+      "impl\/verilog\/fft1d_0.v",
+      "impl\/verilog\/fft1d_0_Block_codeRe.v",
+      "impl\/verilog\/fft1d_0_Loop_1_proc2.v",
+      "impl\/verilog\/fft1d_0_Loop_2_proc2.v",
+      "impl\/verilog\/fft1d_1.v",
+      "impl\/verilog\/fft1d_1_Block_codeRe.v",
+      "impl\/verilog\/fft1d_1_Loop_1_proc1.v",
+      "impl\/verilog\/fft1d_1_Loop_2_proc2.v",
+      "impl\/verilog\/fft2d_top_arr1.v",
+      "impl\/verilog\/fft2d_top_arr1_memcore.v",
+      "impl\/verilog\/fft_configuration_1.v",
+      "impl\/verilog\/fft_configuration_s.v",
+      "impl\/verilog\/fifo_w8_d2_A.v",
+      "impl\/verilog\/fifo_w8_d2_A_x.v",
+      "impl\/verilog\/fifo_w64_d32_A.v",
+      "impl\/verilog\/fifo_w64_d32_A_x.v",
+      "impl\/verilog\/fifo_w64_d32_A_x0.v",
+      "impl\/verilog\/fifo_w64_d32_A_x1.v",
+      "impl\/verilog\/fifo_w64_d32_A_x2.v",
+      "impl\/verilog\/Loop_l_f1d_col_proc2.v",
+      "impl\/verilog\/Loop_l_f1d_row_proc2.v",
+      "impl\/verilog\/Loop_l_rd_xn_proc23.v",
+      "impl\/verilog\/Loop_l_transp_mid_pr.v",
+      "impl\/verilog\/Loop_l_transp_out_pr.v",
+      "impl\/verilog\/Loop_l_wr_o_fifo_pro.v",
+      "impl\/verilog\/Loop_l_wr_xk_proc29.v",
+      "impl\/verilog\/start_for_fft1d_0_Loop_2_proc2_U0.v",
+      "impl\/verilog\/start_for_fft1d_1_Loop_2_proc2_U0.v",
+      "impl\/verilog\/start_for_fft_configuration_1_U0.v",
+      "impl\/verilog\/start_for_fft_configuration_U0.v",
+      "impl\/verilog\/start_for_Loop_l_f1d_row_proc2_U0.v",
+      "impl\/verilog\/start_for_Loop_l_transp_mid_pr_U0.v",
+      "impl\/verilog\/start_for_Loop_l_transp_out_pr_U0.v",
+      "impl\/verilog\/start_for_Loop_l_wr_xk_proc29_U0.v",
+      "impl\/verilog\/fft2d_top.v"
+    ],
+    "Misc": ["impl\/misc\/logo.png"],
+    "Subcore": [
+      "impl\/misc\/fft_configuration_1_core_ip.tcl",
+      "impl\/misc\/fft_configuration_s_core_ip.tcl"
+    ],
+    "DesignXml": "\/home\/erhan\/workspace\/Xilinx\/Vivado_HLS_2019.1\/fft2d\/proj\/solution1\/.autopilot\/db\/fft2d_top.design.xml",
+    "DebugDir": "\/home\/erhan\/workspace\/Xilinx\/Vivado_HLS_2019.1\/fft2d\/proj\/solution1\/.debug",
+    "ProtoInst": [
+      "\/home\/erhan\/workspace\/Xilinx\/Vivado_HLS_2019.1\/fft2d\/proj\/solution1\/.debug\/fft_top.protoinst",
+      "\/home\/erhan\/workspace\/Xilinx\/Vivado_HLS_2019.1\/fft2d\/proj\/solution1\/.debug\/fft2d_top.protoinst"
+    ]
+  },
+  "SubcoreInfo": {
+    "HasXpmMemory": false,
+    "HasClockedDsp": false,
+    "IP": [
+      {
+        "name": "fft_configuration_1_core",
+        "vlnv": "xilinx.com:ip:xfft",
+        "params": "CONFIG.aclken true CONFIG.aresetn true CONFIG.butterfly_type use_luts CONFIG.channels 1 CONFIG.complex_mult_type use_mults_performance CONFIG.cyclic_prefix_insertion 0 CONFIG.data_format floating_point CONFIG.implementation_options pipelined_streaming_io CONFIG.input_width 32 CONFIG.memory_options_data block_ram CONFIG.memory_options_hybrid 0 CONFIG.memory_options_phase_factors block_ram CONFIG.memory_options_reorder block_ram CONFIG.number_of_stages_using_block_ram_for_data_and_phase_factors 0 CONFIG.output_ordering natural_order CONFIG.ovflo 0 CONFIG.phase_factor_width 24 CONFIG.rounding_modes truncation CONFIG.run_time_configurable_transform_length 0 CONFIG.scaling_options scaled CONFIG.target_clock_frequency 400 CONFIG.throttle_scheme nonrealtime CONFIG.transform_length 32 CONFIG.xk_index 0"
+      },
+      {
+        "name": "fft_configuration_s_core",
+        "vlnv": "xilinx.com:ip:xfft",
+        "params": "CONFIG.aclken true CONFIG.aresetn true CONFIG.butterfly_type use_luts CONFIG.channels 1 CONFIG.complex_mult_type use_mults_performance CONFIG.cyclic_prefix_insertion 0 CONFIG.data_format floating_point CONFIG.implementation_options pipelined_streaming_io CONFIG.input_width 32 CONFIG.memory_options_data block_ram CONFIG.memory_options_hybrid 0 CONFIG.memory_options_phase_factors block_ram CONFIG.memory_options_reorder block_ram CONFIG.number_of_stages_using_block_ram_for_data_and_phase_factors 0 CONFIG.output_ordering natural_order CONFIG.ovflo 0 CONFIG.phase_factor_width 24 CONFIG.rounding_modes truncation CONFIG.run_time_configurable_transform_length 0 CONFIG.scaling_options scaled CONFIG.target_clock_frequency 400 CONFIG.throttle_scheme nonrealtime CONFIG.transform_length 32 CONFIG.xk_index 0"
+      }
+    ]
+  },
+  "Interfaces": {
+    "ap_clk": {
+      "type": "clock",
+      "ctype": {"CLK": {"Type": "bool"}},
+      "bundle_name": "ap_clk",
+      "bundle_role": "default",
+      "buses": "xn xk",
+      "reset": "ap_rst_n"
+    },
+    "ap_rst_n": {
+      "type": "reset",
+      "polarity": "ACTIVE_LOW",
+      "ctype": {"RST": {"Type": "bool"}},
+      "bundle_name": "ap_rst_n",
+      "bundle_role": "default"
+    },
+    "xk": {
+      "type": "axi4stream",
+      "mode": "master",
+      "port_prefix": "xk",
+      "has_tready": "1",
+      "ctype": {
+        "TDATA": {
+          "Type": "struct",
+          "Width": "64",
+          "Fields": {
+            "real": {
+              "Type": "real float",
+              "Width": "32"
+            },
+            "imag": {
+              "Type": "real float",
+              "Width": "32"
+            }
+          }
+        },
+        "TLAST": {
+          "Type": "null",
+          "Width": "1"
+        },
+        "TVALID": {"Type": "bool"},
+        "TREADY": {"Type": "bool"}
+      },
+      "port_width": {
+        "TDATA": "64",
+        "TLAST": "1"
+      }
+    },
+    "xn": {
+      "type": "axi4stream",
+      "mode": "slave",
+      "port_prefix": "xn",
+      "has_tready": "1",
+      "ctype": {
+        "TDATA": {
+          "Type": "struct",
+          "Width": "64",
+          "Fields": {
+            "real": {
+              "Type": "real float",
+              "Width": "32"
+            },
+            "imag": {
+              "Type": "real float",
+              "Width": "32"
+            }
+          }
+        },
+        "TLAST": {
+          "Type": "null",
+          "Width": "1"
+        },
+        "TVALID": {"Type": "bool"},
+        "TREADY": {"Type": "bool"}
+      },
+      "port_width": {
+        "TDATA": "64",
+        "TLAST": "1"
+      }
+    }
+  },
+  "RtlPorts": {
+    "ap_clk": {
+      "dir": "in",
+      "width": "1"
+    },
+    "ap_rst_n": {
+      "dir": "in",
+      "width": "1"
+    },
+    "xn_TDATA": {
+      "dir": "in",
+      "width": "64"
+    },
+    "xn_TLAST": {
+      "dir": "in",
+      "width": "1"
+    },
+    "xn_TVALID": {
+      "dir": "in",
+      "width": "1"
+    },
+    "xn_TREADY": {
+      "dir": "out",
+      "width": "1"
+    },
+    "xk_TDATA": {
+      "dir": "out",
+      "width": "64"
+    },
+    "xk_TLAST": {
+      "dir": "out",
+      "width": "1"
+    },
+    "xk_TVALID": {
+      "dir": "out",
+      "width": "1"
+    },
+    "xk_TREADY": {
+      "dir": "in",
+      "width": "1"
+    }
+  },
+  "ModuleInfo": {
+    "Hierarchy": {
+      "ModuleName": "fft2d_top",
+      "Instances": [
+        {
+          "ModuleName": "Loop_l_f1d_col_proc2",
+          "InstanceName": "Loop_l_f1d_col_proc2_U0",
+          "Instances": [{
+              "ModuleName": "fft1d_0",
+              "InstanceName": "grp_fft1d_0_fu_131",
+              "Instances": [
+                {
+                  "ModuleName": "fft1d_0_Loop_1_proc2",
+                  "InstanceName": "fft1d_0_Loop_1_proc2_U0"
+                },
+                {
+                  "ModuleName": "fft1d_0_Loop_2_proc2",
+                  "InstanceName": "fft1d_0_Loop_2_proc2_U0"
+                },
+                {
+                  "ModuleName": "fft1d_0_Block_codeRe",
+                  "InstanceName": "fft1d_0_Block_codeRe_U0"
+                },
+                {
+                  "ModuleName": "fft_configuration_1",
+                  "InstanceName": "fft_configuration_1_U0"
+                }
+              ]
+            }]
+        },
+        {
+          "ModuleName": "Loop_l_f1d_row_proc2",
+          "InstanceName": "Loop_l_f1d_row_proc2_U0",
+          "Instances": [{
+              "ModuleName": "fft1d_1",
+              "InstanceName": "grp_fft1d_1_fu_125",
+              "Instances": [
+                {
+                  "ModuleName": "fft1d_1_Loop_1_proc1",
+                  "InstanceName": "fft1d_1_Loop_1_proc1_U0"
+                },
+                {
+                  "ModuleName": "fft1d_1_Loop_2_proc2",
+                  "InstanceName": "fft1d_1_Loop_2_proc2_U0"
+                },
+                {
+                  "ModuleName": "fft1d_1_Block_codeRe",
+                  "InstanceName": "fft1d_1_Block_codeRe_U0"
+                },
+                {
+                  "ModuleName": "fft_configuration_s",
+                  "InstanceName": "fft_configuration_U0"
+                }
+              ]
+            }]
+        },
+        {
+          "ModuleName": "Loop_l_wr_o_fifo_pro",
+          "InstanceName": "Loop_l_wr_o_fifo_pro_U0"
+        },
+        {
+          "ModuleName": "Loop_l_transp_mid_pr",
+          "InstanceName": "Loop_l_transp_mid_pr_U0"
+        },
+        {
+          "ModuleName": "Loop_l_transp_out_pr",
+          "InstanceName": "Loop_l_transp_out_pr_U0"
+        },
+        {
+          "ModuleName": "Loop_l_wr_xk_proc29",
+          "InstanceName": "Loop_l_wr_xk_proc29_U0"
+        },
+        {
+          "ModuleName": "Loop_l_rd_xn_proc23",
+          "InstanceName": "Loop_l_rd_xn_proc23_U0"
+        }
+      ]
+    },
+    "Info": {
+      "Loop_l_rd_xn_proc23": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "1",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "fft1d_1_Block_codeRe": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "1",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "1"
+      },
+      "fft1d_1_Loop_1_proc1": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "1",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "fft_configuration_s": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "1",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "fft1d_1_Loop_2_proc2": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "1",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "fft1d_1": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "1",
+        "isPipelined": "1",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "Loop_l_f1d_row_proc2": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "1",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "Loop_l_transp_mid_pr": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "1",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "fft1d_0_Block_codeRe": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "1",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "1"
+      },
+      "fft1d_0_Loop_1_proc2": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "1",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "fft_configuration_1": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "1",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "fft1d_0_Loop_2_proc2": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "1",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "fft1d_0": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "1",
+        "isPipelined": "1",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "Loop_l_f1d_col_proc2": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "1",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "Loop_l_transp_out_pr": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "1",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "Loop_l_wr_o_fifo_pro": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "1",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "Loop_l_wr_xk_proc29": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "1",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "fft2d_top": {
+        "FunctionProtocol": "ap_ctrl_none",
+        "isTaskLevelControl": "1",
+        "isPipelined": "1",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      }
+    },
+    "Metrics": {
+      "Loop_l_rd_xn_proc23": {
+        "Latency": {
+          "LatencyBest": "1026",
+          "LatencyAvg": "1026",
+          "LatencyWorst": "1026",
+          "PipelineII": "1026",
+          "PipelineDepth": "",
+          "PipelineType": "none"
+        },
+        "Timing": {
+          "Target": "2.50",
+          "Uncertainty": "0.31",
+          "Estimate": "1.094"
+        },
+        "Loops": [{
+            "Name": "l_rd_xn",
+            "TripCount": "1024",
+            "Latency": "1024",
+            "PipelineII": "1",
+            "PipelineDepth": "2"
+          }],
+        "Area": {
+          "FF": "217",
+          "LUT": "175",
+          "BRAM_18K": "0",
+          "DSP48E": "0",
+          "URAM": "0"
+        }
+      },
+      "fft1d_1_Block_codeRe": {
+        "Latency": {
+          "LatencyBest": "0",
+          "LatencyAvg": "0",
+          "LatencyWorst": "0",
+          "PipelineII": "0",
+          "PipelineDepth": "",
+          "PipelineType": "none"
+        },
+        "Timing": {
+          "Target": "2.50",
+          "Uncertainty": "0.31",
+          "Estimate": "1.094"
+        },
+        "Area": {
+          "FF": "3",
+          "LUT": "29",
+          "BRAM_18K": "0",
+          "DSP48E": "0",
+          "URAM": "0"
+        }
+      },
+      "fft1d_1_Loop_1_proc1": {
+        "Latency": {
+          "LatencyBest": "34",
+          "LatencyAvg": "34",
+          "LatencyWorst": "34",
+          "PipelineII": "34",
+          "PipelineDepth": "",
+          "PipelineType": "none"
+        },
+        "Timing": {
+          "Target": "2.50",
+          "Uncertainty": "0.31",
+          "Estimate": "2.188"
+        },
+        "Loops": [{
+            "Name": "Loop 1",
+            "TripCount": "32",
+            "Latency": "32",
+            "PipelineII": "1",
+            "PipelineDepth": "2"
+          }],
+        "Area": {
+          "FF": "13",
+          "LUT": "108",
+          "BRAM_18K": "0",
+          "DSP48E": "0",
+          "URAM": "0"
+        }
+      },
+      "fft_configuration_s": {
+        "Latency": {
+          "LatencyBest": "179",
+          "LatencyAvg": "179",
+          "LatencyWorst": "179",
+          "PipelineII": "179",
+          "PipelineDepth": "",
+          "PipelineType": "none"
+        },
+        "Timing": {
+          "Target": "2.50",
+          "Uncertainty": "0.31",
+          "Estimate": "2.000"
+        },
+        "Area": {
+          "BRAM_18K": "2",
+          "DSP48E": "0",
+          "FF": "7060",
+          "LUT": "5301",
+          "URAM": "0"
+        }
+      },
+      "fft1d_1_Loop_2_proc2": {
+        "Latency": {
+          "LatencyBest": "34",
+          "LatencyAvg": "34",
+          "LatencyWorst": "34",
+          "PipelineII": "34",
+          "PipelineDepth": "",
+          "PipelineType": "none"
+        },
+        "Timing": {
+          "Target": "2.50",
+          "Uncertainty": "0.31",
+          "Estimate": "2.188"
+        },
+        "Loops": [{
+            "Name": "Loop 1",
+            "TripCount": "32",
+            "Latency": "32",
+            "PipelineII": "1",
+            "PipelineDepth": "2"
+          }],
+        "Area": {
+          "FF": "13",
+          "LUT": "108",
+          "BRAM_18K": "0",
+          "DSP48E": "0",
+          "URAM": "0"
+        }
+      },
+      "fft1d_1": {
+        "Latency": {
+          "LatencyBest": "179",
+          "LatencyAvg": "179",
+          "LatencyWorst": "179",
+          "PipelineII": "180",
+          "PipelineDepth": "",
+          "PipelineType": "dataflow"
+        },
+        "Timing": {
+          "Target": "2.50",
+          "Uncertainty": "0.31",
+          "Estimate": "2.188"
+        },
+        "Area": {
+          "BRAM_18K": "10",
+          "DSP48E": "0",
+          "FF": "7262",
+          "LUT": "5782",
+          "URAM": "0"
+        }
+      },
+      "Loop_l_f1d_row_proc2": {
+        "Latency": {
+          "LatencyBest": "6849",
+          "LatencyAvg": "6849",
+          "LatencyWorst": "6849",
+          "PipelineII": "6849",
+          "PipelineDepth": "",
+          "PipelineType": "none"
+        },
+        "Timing": {
+          "Target": "2.50",
+          "Uncertainty": "0.31",
+          "Estimate": "2.188"
+        },
+        "Loops": [{
+            "Name": "l_f1d_row",
+            "TripCount": "32",
+            "Latency": "6848",
+            "PipelineII": "",
+            "PipelineDepth": "214",
+            "Loops": [{
+                "Name": "l_f1d_row.1",
+                "TripCount": "32",
+                "Latency": "32",
+                "PipelineII": "",
+                "PipelineDepth": "1"
+              }]
+          }],
+        "Area": {
+          "BRAM_18K": "14",
+          "DSP48E": "0",
+          "FF": "7370",
+          "LUT": "6006",
+          "URAM": "0"
+        }
+      },
+      "Loop_l_transp_mid_pr": {
+        "Latency": {
+          "LatencyBest": "1027",
+          "LatencyAvg": "1027",
+          "LatencyWorst": "1027",
+          "PipelineII": "1027",
+          "PipelineDepth": "",
+          "PipelineType": "none"
+        },
+        "Timing": {
+          "Target": "2.50",
+          "Uncertainty": "0.31",
+          "Estimate": "1.956"
+        },
+        "Loops": [{
+            "Name": "l_transp_mid_L",
+            "TripCount": "1024",
+            "Latency": "1025",
+            "PipelineII": "1",
+            "PipelineDepth": "3"
+          }],
+        "Area": {
+          "FF": "118",
+          "LUT": "213",
+          "BRAM_18K": "0",
+          "DSP48E": "0",
+          "URAM": "0"
+        }
+      },
+      "fft1d_0_Block_codeRe": {
+        "Latency": {
+          "LatencyBest": "0",
+          "LatencyAvg": "0",
+          "LatencyWorst": "0",
+          "PipelineII": "0",
+          "PipelineDepth": "",
+          "PipelineType": "none"
+        },
+        "Timing": {
+          "Target": "2.50",
+          "Uncertainty": "0.31",
+          "Estimate": "1.094"
+        },
+        "Area": {
+          "FF": "3",
+          "LUT": "29",
+          "BRAM_18K": "0",
+          "DSP48E": "0",
+          "URAM": "0"
+        }
+      },
+      "fft1d_0_Loop_1_proc2": {
+        "Latency": {
+          "LatencyBest": "34",
+          "LatencyAvg": "34",
+          "LatencyWorst": "34",
+          "PipelineII": "34",
+          "PipelineDepth": "",
+          "PipelineType": "none"
+        },
+        "Timing": {
+          "Target": "2.50",
+          "Uncertainty": "0.31",
+          "Estimate": "2.188"
+        },
+        "Loops": [{
+            "Name": "Loop 1",
+            "TripCount": "32",
+            "Latency": "32",
+            "PipelineII": "1",
+            "PipelineDepth": "2"
+          }],
+        "Area": {
+          "FF": "13",
+          "LUT": "108",
+          "BRAM_18K": "0",
+          "DSP48E": "0",
+          "URAM": "0"
+        }
+      },
+      "fft_configuration_1": {
+        "Latency": {
+          "LatencyBest": "179",
+          "LatencyAvg": "179",
+          "LatencyWorst": "179",
+          "PipelineII": "179",
+          "PipelineDepth": "",
+          "PipelineType": "none"
+        },
+        "Timing": {
+          "Target": "2.50",
+          "Uncertainty": "0.31",
+          "Estimate": "2.000"
+        },
+        "Area": {
+          "BRAM_18K": "2",
+          "DSP48E": "0",
+          "FF": "7060",
+          "LUT": "5301",
+          "URAM": "0"
+        }
+      },
+      "fft1d_0_Loop_2_proc2": {
+        "Latency": {
+          "LatencyBest": "34",
+          "LatencyAvg": "34",
+          "LatencyWorst": "34",
+          "PipelineII": "34",
+          "PipelineDepth": "",
+          "PipelineType": "none"
+        },
+        "Timing": {
+          "Target": "2.50",
+          "Uncertainty": "0.31",
+          "Estimate": "2.188"
+        },
+        "Loops": [{
+            "Name": "Loop 1",
+            "TripCount": "32",
+            "Latency": "32",
+            "PipelineII": "1",
+            "PipelineDepth": "2"
+          }],
+        "Area": {
+          "FF": "13",
+          "LUT": "108",
+          "BRAM_18K": "0",
+          "DSP48E": "0",
+          "URAM": "0"
+        }
+      },
+      "fft1d_0": {
+        "Latency": {
+          "LatencyBest": "179",
+          "LatencyAvg": "179",
+          "LatencyWorst": "179",
+          "PipelineII": "180",
+          "PipelineDepth": "",
+          "PipelineType": "dataflow"
+        },
+        "Timing": {
+          "Target": "2.50",
+          "Uncertainty": "0.31",
+          "Estimate": "2.188"
+        },
+        "Area": {
+          "BRAM_18K": "10",
+          "DSP48E": "0",
+          "FF": "7262",
+          "LUT": "5782",
+          "URAM": "0"
+        }
+      },
+      "Loop_l_f1d_col_proc2": {
+        "Latency": {
+          "LatencyBest": "8897",
+          "LatencyAvg": "8897",
+          "LatencyWorst": "8897",
+          "PipelineII": "8897",
+          "PipelineDepth": "",
+          "PipelineType": "none"
+        },
+        "Timing": {
+          "Target": "2.50",
+          "Uncertainty": "0.31",
+          "Estimate": "2.188"
+        },
+        "Loops": [{
+            "Name": "l_f1d_col",
+            "TripCount": "32",
+            "Latency": "8896",
+            "PipelineII": "",
+            "PipelineDepth": "278",
+            "Loops": [{
+                "Name": "l_f1d_col.1",
+                "TripCount": "32",
+                "Latency": "96",
+                "PipelineII": "",
+                "PipelineDepth": "3"
+              }]
+          }],
+        "Area": {
+          "BRAM_18K": "14",
+          "DSP48E": "0",
+          "FF": "7447",
+          "LUT": "6023",
+          "URAM": "0"
+        }
+      },
+      "Loop_l_transp_out_pr": {
+        "Latency": {
+          "LatencyBest": "1027",
+          "LatencyAvg": "1027",
+          "LatencyWorst": "1027",
+          "PipelineII": "1027",
+          "PipelineDepth": "",
+          "PipelineType": "none"
+        },
+        "Timing": {
+          "Target": "2.50",
+          "Uncertainty": "0.31",
+          "Estimate": "1.956"
+        },
+        "Loops": [{
+            "Name": "l_transp_out_L",
+            "TripCount": "1024",
+            "Latency": "1025",
+            "PipelineII": "1",
+            "PipelineDepth": "3"
+          }],
+        "Area": {
+          "FF": "118",
+          "LUT": "213",
+          "BRAM_18K": "0",
+          "DSP48E": "0",
+          "URAM": "0"
+        }
+      },
+      "Loop_l_wr_o_fifo_pro": {
+        "Latency": {
+          "LatencyBest": "1028",
+          "LatencyAvg": "1028",
+          "LatencyWorst": "1028",
+          "PipelineII": "1028",
+          "PipelineDepth": "",
+          "PipelineType": "none"
+        },
+        "Timing": {
+          "Target": "2.50",
+          "Uncertainty": "0.31",
+          "Estimate": "1.956"
+        },
+        "Loops": [{
+            "Name": "l_wr_o_fifo_L",
+            "TripCount": "1024",
+            "Latency": "1026",
+            "PipelineII": "1",
+            "PipelineDepth": "4"
+          }],
+        "Area": {
+          "BRAM_18K": "0",
+          "FF": "177",
+          "LUT": "245",
+          "DSP48E": "0",
+          "URAM": "0"
+        }
+      },
+      "Loop_l_wr_xk_proc29": {
+        "Latency": {
+          "LatencyBest": "1027",
+          "LatencyAvg": "1027",
+          "LatencyWorst": "1027",
+          "PipelineII": "1027",
+          "PipelineDepth": "",
+          "PipelineType": "none"
+        },
+        "Timing": {
+          "Target": "2.50",
+          "Uncertainty": "0.31",
+          "Estimate": "1.231"
+        },
+        "Loops": [{
+            "Name": "l_wr_xk",
+            "TripCount": "1024",
+            "Latency": "1025",
+            "PipelineII": "1",
+            "PipelineDepth": "3"
+          }],
+        "Area": {
+          "FF": "159",
+          "LUT": "209",
+          "BRAM_18K": "0",
+          "DSP48E": "0",
+          "URAM": "0"
+        }
+      },
+      "fft2d_top": {
+        "Latency": {
+          "LatencyBest": "17299",
+          "LatencyAvg": "17299",
+          "LatencyWorst": "17299",
+          "PipelineII": "8898",
+          "PipelineDepth": "",
+          "PipelineType": "dataflow"
+        },
+        "Timing": {
+          "Target": "2.50",
+          "Uncertainty": "0.31",
+          "Estimate": "2.188"
+        },
+        "Area": {
+          "BRAM_18K": "44",
+          "DSP48E": "0",
+          "FF": "15930",
+          "LUT": "13380",
+          "URAM": "2"
+        }
+      }
+    }
+  },
+  "Sdx": {
+    "Target": "none",
+    "ProfileOption": "0",
+    "ProfileType": "none",
+    "XO": "",
+    "KernelName": "fft2d_top",
+    "EnableXoSwEmu": "1"
+  },
+  "GenData": {
+    "DataVersion": "0.2",
+    "Time": "2020-05-01 00:23:39 +03",
+    "ToolName": "vivado_hls",
+    "ToolVersion": "2019.1"
+  }
+}

@@ -1,0 +1,153 @@
+
+
+================================================================
+== Vivado HLS Report for 'fft1d_1_Loop_2_proc2'
+================================================================
+* Date:           Fri May  1 00:15:20 2020
+
+* Version:        2019.1 (Build 2552052 on Fri May 24 15:28:33 MDT 2019)
+* Project:        proj
+* Solution:       solution1
+* Product family: zynquplus
+* Target device:  xczu7ev-ffvc1156-2-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing (ns): 
+    * Summary: 
+    +--------+-------+----------+------------+
+    |  Clock | Target| Estimated| Uncertainty|
+    +--------+-------+----------+------------+
+    |ap_clk  |   2.50|     2.188|        0.31|
+    +--------+-------+----------+------------+
+
++ Latency (clock cycles): 
+    * Summary: 
+    +-----+-----+-----+-----+---------+
+    |  Latency  |  Interval | Pipeline|
+    | min | max | min | max |   Type  |
+    +-----+-----+-----+-----+---------+
+    |   34|   34|   34|   34|   none  |
+    +-----+-----+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +----------+-----+-----+----------+-----------+-----------+------+----------+
+        |          |  Latency  | Iteration|  Initiation Interval  | Trip |          |
+        | Loop Name| min | max |  Latency |  achieved |   target  | Count| Pipelined|
+        +----------+-----+-----+----------+-----------+-----------+------+----------+
+        |- Loop 1  |   32|   32|         2|          1|          1|    32|    yes   |
+        +----------+-----+-----+----------+-----------+-----------+------+----------+
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 2
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 0
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
++ Individual pipeline summary: 
+  * Pipeline-0: initiation interval (II) = 1, depth = 2
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 4
+* Pipeline : 1
+  Pipeline-0 : II = 1, D = 2, States = { 2 3 }
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 2 
+2 --> 4 3 
+3 --> 2 
+4 --> 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 0.65>
+ST_1 : Operation 5 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(i64* %out_V, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str62, i32 0, i32 0, [1 x i8]* @p_str63, [1 x i8]* @p_str64, [1 x i8]* @p_str65, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str66, [1 x i8]* @p_str67)"   --->   Operation 5 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 6 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(i64* %xk, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str139, i32 0, i32 0, [1 x i8]* @p_str140, [1 x i8]* @p_str141, [1 x i8]* @p_str142, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str143, [1 x i8]* @p_str144)"   --->   Operation 6 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 7 [1/1] (0.65ns)   --->   "br label %0" [fft2d_top.cpp:36->fft2d_top.cpp:69]   --->   Operation 7 'br' <Predicate = true> <Delay = 0.65>
+
+State 2 <SV = 1> <Delay = 0.78>
+ST_2 : Operation 8 [1/1] (0.00ns)   --->   "%i_0_i2 = phi i6 [ 0, %newFuncRoot ], [ %i, %hls_label_1 ]"   --->   Operation 8 'phi' 'i_0_i2' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 9 [1/1] (0.78ns)   --->   "%icmp_ln36 = icmp eq i6 %i_0_i2, -32" [fft2d_top.cpp:36->fft2d_top.cpp:69]   --->   Operation 9 'icmp' 'icmp_ln36' <Predicate = true> <Delay = 0.78> <Core = "Cmp">   --->   Core 25 'Cmp' <Latency = 0> <II = 1> <Delay = 0.78> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 10 [1/1] (0.00ns)   --->   "%empty = call i32 (...)* @_ssdm_op_SpecLoopTripCount(i64 32, i64 32, i64 32)"   --->   Operation 10 'speclooptripcount' 'empty' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 11 [1/1] (0.78ns)   --->   "%i = add i6 %i_0_i2, 1" [fft2d_top.cpp:36->fft2d_top.cpp:69]   --->   Operation 11 'add' 'i' <Predicate = true> <Delay = 0.78> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 0.78> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 12 [1/1] (0.00ns)   --->   "br i1 %icmp_ln36, label %pop_fft1d_fifo.exit.exitStub, label %hls_label_1" [fft2d_top.cpp:36->fft2d_top.cpp:69]   --->   Operation 12 'br' <Predicate = true> <Delay = 0.00>
+
+State 3 <SV = 2> <Delay = 2.18>
+ST_3 : Operation 13 [1/1] (0.00ns)   --->   "%tmp_s = call i32 (...)* @_ssdm_op_SpecRegionBegin([12 x i8]* @p_str16)" [fft2d_top.cpp:37->fft2d_top.cpp:69]   --->   Operation 13 'specregionbegin' 'tmp_s' <Predicate = (!icmp_ln36)> <Delay = 0.00>
+ST_3 : Operation 14 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecPipeline(i32 -1, i32 1, i32 1, i32 0, [1 x i8]* @p_str1) nounwind" [fft2d_top.cpp:38->fft2d_top.cpp:69]   --->   Operation 14 'specpipeline' <Predicate = (!icmp_ln36)> <Delay = 0.00>
+ST_3 : Operation 15 [1/1] (1.09ns)   --->   "%tmp_1 = call i64 @_ssdm_op_Read.ap_fifo.volatile.i64P(i64* %xk)" [fft2d_top.cpp:41->fft2d_top.cpp:69]   --->   Operation 15 'read' 'tmp_1' <Predicate = (!icmp_ln36)> <Delay = 1.09> <Core = "FIFO_SRL">   --->   Core 36 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 1.83> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 64> <Depth = 0> <FIFO>
+ST_3 : Operation 16 [1/1] (1.09ns)   --->   "call void @_ssdm_op_Write.ap_fifo.volatile.i64P(i64* %out_V, i64 %tmp_1)" [fft2d_top.cpp:44->fft2d_top.cpp:69]   --->   Operation 16 'write' <Predicate = (!icmp_ln36)> <Delay = 1.09> <Core = "FIFO_SRL">   --->   Core 36 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 1.83> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 64> <Depth = 0> <FIFO>
+ST_3 : Operation 17 [1/1] (0.00ns)   --->   "%empty_10 = call i32 (...)* @_ssdm_op_SpecRegionEnd([12 x i8]* @p_str16, i32 %tmp_s)" [fft2d_top.cpp:45->fft2d_top.cpp:69]   --->   Operation 17 'specregionend' 'empty_10' <Predicate = (!icmp_ln36)> <Delay = 0.00>
+ST_3 : Operation 18 [1/1] (0.00ns)   --->   "br label %0" [fft2d_top.cpp:36->fft2d_top.cpp:69]   --->   Operation 18 'br' <Predicate = (!icmp_ln36)> <Delay = 0.00>
+
+State 4 <SV = 2> <Delay = 0.00>
+ST_4 : Operation 19 [1/1] (0.00ns)   --->   "ret void"   --->   Operation 19 'ret' <Predicate = true> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 2.5ns, clock uncertainty: 0.312ns.
+
+ <State 1>: 0.656ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation ('i') with incoming values : ('i', fft2d_top.cpp:36->fft2d_top.cpp:69) [7]  (0.656 ns)
+
+ <State 2>: 0.785ns
+The critical path consists of the following:
+	'phi' operation ('i') with incoming values : ('i', fft2d_top.cpp:36->fft2d_top.cpp:69) [7]  (0 ns)
+	'icmp' operation ('icmp_ln36', fft2d_top.cpp:36->fft2d_top.cpp:69) [8]  (0.785 ns)
+
+ <State 3>: 2.19ns
+The critical path consists of the following:
+	fifo read on port 'xk' (fft2d_top.cpp:41->fft2d_top.cpp:69) [15]  (1.09 ns)
+	fifo write on port 'out_V' (fft2d_top.cpp:44->fft2d_top.cpp:69) [16]  (1.09 ns)
+
+ <State 4>: 0ns
+The critical path consists of the following:
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

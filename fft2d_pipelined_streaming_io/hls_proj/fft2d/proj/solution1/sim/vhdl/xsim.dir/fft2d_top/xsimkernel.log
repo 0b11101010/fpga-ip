@@ -1,0 +1,7 @@
+Running: xsim.dir/fft2d_top/xsimk -simmode gui -wdb fft2d_top.wdb -simrunnum 0 -socket 50265
+Design successfully loaded
+Design Loading Memory Usage: 88340 KB (Peak: 88340 KB)
+Design Loading CPU Usage: 120 ms
+Simulation completed
+Simulation Memory Usage: 178268 KB (Peak: 227608 KB)
+Simulation CPU Usage: 163170 ms

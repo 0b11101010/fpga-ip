@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xd:acceleratorMap xmlns:xd="http://www.xilinx.com/xidane" xd:functionName="fft2d_top" xd:componentRef="fft2d_top" xd:initiationInterval="17300" xd:clockPeriod="2.500" xd:sequential="true" xd:hostMachine="64" xd:reset="control">
+  <xd:arg xd:name="xn[].data.real" xd:originalName="xn" xd:direction="in" xd:interfaceRef="xn" xd:busTypeRef="axis" xd:dataPack="true" xd:bitMapping="31:0" xd:arraySize="1024" xd:dataWidth="32"/>
+  <xd:arg xd:name="xn[].data.imag" xd:originalName="xn" xd:direction="in" xd:interfaceRef="xn" xd:busTypeRef="axis" xd:dataPack="true" xd:bitMapping="63:32" xd:arraySize="1024" xd:dataWidth="32"/>
+  <xd:arg xd:name="xn[].last" xd:originalName="xn" xd:direction="in" xd:interfaceRef="xn" xd:busTypeRef="axis" xd:arraySize="1024" xd:dataWidth="1"/>
+  <xd:arg xd:name="xk[].data.real" xd:originalName="xk" xd:direction="out" xd:interfaceRef="xk" xd:busTypeRef="axis" xd:dataPack="true" xd:bitMapping="31:0" xd:arraySize="1024" xd:dataWidth="32"/>
+  <xd:arg xd:name="xk[].data.imag" xd:originalName="xk" xd:direction="out" xd:interfaceRef="xk" xd:busTypeRef="axis" xd:dataPack="true" xd:bitMapping="63:32" xd:arraySize="1024" xd:dataWidth="32"/>
+  <xd:arg xd:name="xk[].last" xd:originalName="xk" xd:direction="out" xd:interfaceRef="xk" xd:busTypeRef="axis" xd:arraySize="1024" xd:dataWidth="1"/>
+  <xd:latencyEstimates xd:best-case="17299" xd:worst-case="17299" xd:average-case="17299"/>
+  <xd:resourceEstimates xd:LUT="13380" xd:FF="15930" xd:BRAM="44" xd:DSP="0"/>
+</xd:acceleratorMap>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<autopilotfilemapping:AutoPilotFileMapping xmlns:autopilotfilemapping="www.autoesl.com/autopilotfilemapping">
+  <source>
+    <originFiles name="fft2d_top.cpp" path="/home/erhan/workspace/Xilinx/Vivado_HLS_2019.1/fft2d/fft2d_top.cpp"/>
+  </source>
+  <testbench>
+    <originFiles name="fft2d_tb.cpp" path="/home/erhan/workspace/Xilinx/Vivado_HLS_2019.1/fft2d/fft2d_tb.cpp"/>
+  </testbench>
+</autopilotfilemapping:AutoPilotFileMapping>

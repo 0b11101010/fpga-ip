@@ -1,0 +1,25 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:47:09 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Fri May  1 00:17:52 2020
+# Process ID: 12900
+# Current directory: /home/erhan/workspace/Xilinx/Vivado_HLS_2019.1/fft2d/proj/solution1/.autopilot/db/ip_tmp
+# Command line: vivado  -notrace -mode batch -source run_vivado_gen_ip.tcl
+# Log file: /home/erhan/workspace/Xilinx/Vivado_HLS_2019.1/fft2d/proj/solution1/.autopilot/db/ip_tmp/vivado.log
+# Journal file: /home/erhan/workspace/Xilinx/Vivado_HLS_2019.1/fft2d/proj/solution1/.autopilot/db/ip_tmp/vivado.jou
+#-----------------------------------------------------------
+source run_vivado_gen_ip.tcl -notrace
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/Xilinx/Vivado/2019.1/data/ip'.
+create_ip: Time (s): cpu = 00:00:06 ; elapsed = 00:00:14 . Memory (MB): peak = 1482.242 ; gain = 118.512 ; free physical = 2691 ; free virtual = 82206
+WARNING: [IP_Flow 19-3374] An attempt to modify the value of disabled parameter 'cyclic_prefix_insertion' from 'false' to '0' has been ignored for IP 'fft_configuration_s_core'
+WARNING: [IP_Flow 19-3374] An attempt to modify the value of disabled parameter 'memory_options_hybrid' from 'false' to '0' has been ignored for IP 'fft_configuration_s_core'
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'fft_configuration_s_core'...
+INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'fft_configuration_s_core'...
+WARNING: [IP_Flow 19-3374] An attempt to modify the value of disabled parameter 'cyclic_prefix_insertion' from 'false' to '0' has been ignored for IP 'fft_configuration_1_core'
+WARNING: [IP_Flow 19-3374] An attempt to modify the value of disabled parameter 'memory_options_hybrid' from 'false' to '0' has been ignored for IP 'fft_configuration_1_core'
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'fft_configuration_1_core'...
+INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'fft_configuration_1_core'...
+INFO: [Common 17-206] Exiting Vivado at Fri May  1 00:18:34 2020...

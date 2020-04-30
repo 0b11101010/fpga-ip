@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# Webtalk v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:47:09 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Fri May  1 00:22:55 2020
+# Process ID: 21636
+# Current directory: /home/erhan/workspace/Xilinx/Vivado_HLS_2019.1/fft2d/proj/solution1/sim/vhdl
+# Command line: wbtcv -mode batch -source /home/erhan/workspace/Xilinx/Vivado_HLS_2019.1/fft2d/proj/solution1/sim/vhdl/xsim.dir/fft2d_top/webtalk/xsim_webtalk.tcl -notrace
+# Log file: /home/erhan/workspace/Xilinx/Vivado_HLS_2019.1/fft2d/proj/solution1/sim/vhdl/webtalk.log
+# Journal file: /home/erhan/workspace/Xilinx/Vivado_HLS_2019.1/fft2d/proj/solution1/sim/vhdl/webtalk.jou
+#-----------------------------------------------------------
+source /home/erhan/workspace/Xilinx/Vivado_HLS_2019.1/fft2d/proj/solution1/sim/vhdl/xsim.dir/fft2d_top/webtalk/xsim_webtalk.tcl -notrace
+INFO: [Common 17-206] Exiting Webtalk at Fri May  1 00:22:55 2020...

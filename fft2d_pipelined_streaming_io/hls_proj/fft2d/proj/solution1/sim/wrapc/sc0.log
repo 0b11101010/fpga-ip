@@ -1,0 +1,5 @@
+   Build using "/opt/Xilinx/Vivado/2019.1/tps/lnx64/gcc-6.2.0/bin/g++"
+   Compiling fft2d_top.cpp_pre.cpp.tb.cpp
+   Compiling fft2d_tb.cpp_pre.cpp.tb.cpp
+   Compiling apatb_fft2d_top.cpp
+   Generating cosim.tv.exe

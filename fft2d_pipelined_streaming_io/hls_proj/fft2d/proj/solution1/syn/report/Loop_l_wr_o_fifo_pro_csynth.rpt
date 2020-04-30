@@ -1,0 +1,172 @@
+
+
+================================================================
+== Vivado HLS Report for 'Loop_l_wr_o_fifo_pro'
+================================================================
+* Date:           Fri May  1 00:15:31 2020
+
+* Version:        2019.1 (Build 2552052 on Fri May 24 15:28:33 MDT 2019)
+* Project:        proj
+* Solution:       solution1
+* Product family: zynquplus
+* Target device:  xczu7ev-ffvc1156-2-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing (ns): 
+    * Summary: 
+    +--------+-------+----------+------------+
+    |  Clock | Target| Estimated| Uncertainty|
+    +--------+-------+----------+------------+
+    |ap_clk  |   2.50|     1.956|        0.31|
+    +--------+-------+----------+------------+
+
++ Latency (clock cycles): 
+    * Summary: 
+    +------+------+------+------+---------+
+    |   Latency   |   Interval  | Pipeline|
+    |  min |  max |  min |  max |   Type  |
+    +------+------+------+------+---------+
+    |  1028|  1028|  1028|  1028|   none  |
+    +------+------+------+------+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +-----------------+------+------+----------+-----------+-----------+------+----------+
+        |                 |   Latency   | Iteration|  Initiation Interval  | Trip |          |
+        |    Loop Name    |  min |  max |  Latency |  achieved |   target  | Count| Pipelined|
+        +-----------------+------+------+----------+-----------+-----------+------+----------+
+        |- l_wr_o_fifo_L  |  1026|  1026|         4|          1|          1|  1024|    yes   |
+        +-----------------+------+------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-------+--------+--------+-----+
+|       Name      | BRAM_18K| DSP48E|   FF   |   LUT  | URAM|
++-----------------+---------+-------+--------+--------+-----+
+|DSP              |        -|      -|       -|       -|    -|
+|Expression       |        -|      -|       0|     111|    -|
+|FIFO             |        -|      -|       -|       -|    -|
+|Instance         |        -|      -|       -|       -|    -|
+|Memory           |        -|      -|       -|       -|    -|
+|Multiplexer      |        -|      -|       -|     102|    -|
+|Register         |        0|      -|     177|      32|    -|
++-----------------+---------+-------+--------+--------+-----+
+|Total            |        0|      0|     177|     245|    0|
++-----------------+---------+-------+--------+--------+-----+
+|Available        |      624|   1728|  460800|  230400|   96|
++-----------------+---------+-------+--------+--------+-----+
+|Utilization (%)  |        0|      0|   ~0   |   ~0   |    0|
++-----------------+---------+-------+--------+--------+-----+
+
++ Detail: 
+    * Instance: 
+    N/A
+
+    * DSP48E: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +----------------------------------+----------+-------+---+----+------------+------------+
+    |           Variable Name          | Operation| DSP48E| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +----------------------------------+----------+-------+---+----+------------+------------+
+    |add_ln180_1_fu_151_p2             |     +    |      0|  0|  15|           1|           6|
+    |add_ln180_fu_131_p2               |     +    |      0|  0|  18|          11|           1|
+    |index_fu_181_p2                   |     +    |      0|  0|  17|          10|          10|
+    |j_fu_187_p2                       |     +    |      0|  0|  15|           1|           6|
+    |ap_block_pp0_stage0_01001         |    and   |      0|  0|   2|           1|           1|
+    |ap_block_state5_pp0_stage0_iter3  |    and   |      0|  0|   2|           1|           1|
+    |icmp_ln180_fu_125_p2              |   icmp   |      0|  0|  13|          11|          12|
+    |icmp_ln182_fu_137_p2              |   icmp   |      0|  0|  11|           6|           7|
+    |ap_block_state1                   |    or    |      0|  0|   2|           1|           1|
+    |select_ln186_1_fu_157_p3          |  select  |      0|  0|   6|           1|           6|
+    |select_ln186_fu_143_p3            |  select  |      0|  0|   6|           1|           1|
+    |ap_enable_pp0                     |    xor   |      0|  0|   2|           1|           2|
+    |ap_enable_reg_pp0_iter1           |    xor   |      0|  0|   2|           2|           1|
+    +----------------------------------+----------+-------+---+----+------------+------------+
+    |Total                             |          |      0|  0| 111|          48|          55|
+    +----------------------------------+----------+-------+---+----+------------+------------+
+
+    * Multiplexer: 
+    +--------------------------------+----+-----------+-----+-----------+
+    |              Name              | LUT| Input Size| Bits| Total Bits|
+    +--------------------------------+----+-----------+-----+-----------+
+    |ap_NS_fsm                       |  21|          4|    1|          4|
+    |ap_done                         |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter1         |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter3         |   9|          2|    1|          2|
+    |ap_phi_mux_i10_0_phi_fu_107_p4  |   9|          2|    6|         12|
+    |i10_0_reg_103                   |   9|          2|    6|         12|
+    |indvar_flatten_reg_92           |   9|          2|   11|         22|
+    |j11_0_reg_114                   |   9|          2|    6|         12|
+    |real_start                      |   9|          2|    1|          2|
+    |xk_fifo_V_blk_n                 |   9|          2|    1|          2|
+    +--------------------------------+----+-----------+-----+-----------+
+    |Total                           | 102|         22|   35|         72|
+    +--------------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-------------------------+----+----+-----+-----------+
+    |           Name          | FF | LUT| Bits| Const Bits|
+    +-------------------------+----+----+-----+-----------+
+    |ap_CS_fsm                |   3|   0|    3|          0|
+    |ap_done_reg              |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter0  |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter1  |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter2  |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter3  |   1|   0|    1|          0|
+    |i10_0_reg_103            |   6|   0|    6|          0|
+    |icmp_ln180_reg_197       |   1|   0|    1|          0|
+    |index_reg_211            |  10|   0|   10|          0|
+    |indvar_flatten_reg_92    |  11|   0|   11|          0|
+    |j11_0_reg_114            |   6|   0|    6|          0|
+    |select_ln186_1_reg_206   |   6|   0|    6|          0|
+    |start_once_reg           |   1|   0|    1|          0|
+    |tmp_6_reg_226            |  64|   0|   64|          0|
+    |icmp_ln180_reg_197       |  64|  32|    1|          0|
+    +-------------------------+----+----+-----+-----------+
+    |Total                    | 177|  32|  114|          0|
+    +-------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++------------------+-----+-----+------------+----------------------+--------------+
+|     RTL Ports    | Dir | Bits|  Protocol  |     Source Object    |    C Type    |
++------------------+-----+-----+------------+----------------------+--------------+
+|ap_clk            |  in |    1| ap_ctrl_hs | Loop_l_wr_o_fifo_pro | return value |
+|ap_rst            |  in |    1| ap_ctrl_hs | Loop_l_wr_o_fifo_pro | return value |
+|ap_start          |  in |    1| ap_ctrl_hs | Loop_l_wr_o_fifo_pro | return value |
+|start_full_n      |  in |    1| ap_ctrl_hs | Loop_l_wr_o_fifo_pro | return value |
+|ap_done           | out |    1| ap_ctrl_hs | Loop_l_wr_o_fifo_pro | return value |
+|ap_continue       |  in |    1| ap_ctrl_hs | Loop_l_wr_o_fifo_pro | return value |
+|ap_idle           | out |    1| ap_ctrl_hs | Loop_l_wr_o_fifo_pro | return value |
+|ap_ready          | out |    1| ap_ctrl_hs | Loop_l_wr_o_fifo_pro | return value |
+|start_out         | out |    1| ap_ctrl_hs | Loop_l_wr_o_fifo_pro | return value |
+|start_write       | out |    1| ap_ctrl_hs | Loop_l_wr_o_fifo_pro | return value |
+|arr1_address0     | out |   10|  ap_memory |         arr1         |     array    |
+|arr1_ce0          | out |    1|  ap_memory |         arr1         |     array    |
+|arr1_q0           |  in |   64|  ap_memory |         arr1         |     array    |
+|xk_fifo_V_din     | out |   64|   ap_fifo  |       xk_fifo_V      |    pointer   |
+|xk_fifo_V_full_n  |  in |    1|   ap_fifo  |       xk_fifo_V      |    pointer   |
+|xk_fifo_V_write   | out |    1|   ap_fifo  |       xk_fifo_V      |    pointer   |
++------------------+-----+-----+------------+----------------------+--------------+
+

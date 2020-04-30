@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:47:09 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Fri May  1 00:27:24 2020
+# Process ID: 22730
+# Current directory: /home/erhan/workspace/Xilinx/Vivado_HLS_2019.1/fft2d/proj/solution1/impl/vhdl/project.runs/synth_1
+# Command line: vivado -log bd_0_wrapper.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source bd_0_wrapper.tcl
+# Log file: /home/erhan/workspace/Xilinx/Vivado_HLS_2019.1/fft2d/proj/solution1/impl/vhdl/project.runs/synth_1/bd_0_wrapper.vds
+# Journal file: /home/erhan/workspace/Xilinx/Vivado_HLS_2019.1/fft2d/proj/solution1/impl/vhdl/project.runs/synth_1/vivado.jou
+#-----------------------------------------------------------
+source bd_0_wrapper.tcl -notrace

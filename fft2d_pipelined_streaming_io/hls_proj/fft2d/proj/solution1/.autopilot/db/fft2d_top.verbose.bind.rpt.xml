@@ -1,0 +1,52 @@
+<profile>
+
+<section name = "Vivado HLS Report for 'fft2d_top'" level="0">
+<item name = "Date">Fri May  1 00:15:26 2020
+</item>
+<item name = "Version">2019.1 (Build 2552052 on Fri May 24 15:28:33 MDT 2019)</item>
+<item name = "Project">proj</item>
+<item name = "Solution">solution1</item>
+<item name = "Product family">zynquplus</item>
+<item name = "Target device">xczu7ev-ffvc1156-2-e</item>
+</section>
+
+<section name = "Performance Estimates" level="0">
+<item name = "Timing (ns)">
+<section name = "" level="1">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="4">Clock, Target, Estimated, Uncertainty</keys>
+<column name="ap_clk">2.50, 2.188, 0.31</column>
+</table>
+</item>
+</section>
+</item>
+<item name = "Latency (clock cycles)">
+<section name = "" level="1">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="6">, min, max, min, max, Type</keys>
+<column name="">17299, 17299, 8898, 8898, dataflow</column>
+</table>
+</item>
+<item name = "Detail">
+<section name = "" level="1">
+<item name = "Instance"><table name="" hasTotal="0">
+<keys size="7">Instance, Module, min, max, min, max, Type</keys>
+<column name="grp_Loop_l_f1d_col_proc2_fu_152">Loop_l_f1d_col_proc2, 8897, 8897, 8897, 8897, none</column>
+<column name="grp_Loop_l_f1d_row_proc2_fu_158">Loop_l_f1d_row_proc2, 6849, 6849, 6849, 6849, none</column>
+<column name="grp_Loop_l_wr_o_fifo_pro_fu_164">Loop_l_wr_o_fifo_pro, 1028, 1028, 1028, 1028, none</column>
+<column name="grp_Loop_l_transp_mid_pr_fu_170">Loop_l_transp_mid_pr, 1027, 1027, 1027, 1027, none</column>
+<column name="grp_Loop_l_transp_out_pr_fu_176">Loop_l_transp_out_pr, 1027, 1027, 1027, 1027, none</column>
+<column name="grp_Loop_l_wr_xk_proc29_fu_182">Loop_l_wr_xk_proc29, 1027, 1027, 1027, 1027, none</column>
+<column name="grp_Loop_l_rd_xn_proc23_fu_191">Loop_l_rd_xn_proc23, 1026, 1026, 1026, 1026, none</column>
+</table>
+</item>
+<item name = "Loop"><table name="" hasTotal="0">
+<keys size="8">Loop Name, min, max, Latency, achieved, target, Count, Pipelined</keys>
+</table>
+</item>
+</section>
+</item>
+</section>
+</item>
+</section>
+</profile>

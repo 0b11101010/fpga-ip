@@ -1,0 +1,1 @@
+set ::AESL_AUTOSIM::gTopFileName /home/erhan/workspace/Xilinx/Vivado_HLS_2019.1/fft2d/proj/solution1/./sim/autowrap/testbench/fft2d_top.cpp_pre.cpp.tb.cpp

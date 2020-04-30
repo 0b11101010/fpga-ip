@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Fri May  1 00:24:03 2020" VIVADOVERSION="2019.1">
+
+  <SYSTEMINFO ARCH="zynquplus" DEVICE="xczu7ev" NAME="bd_0" PACKAGE="ffvc1156" SPEEDGRADE="-2"/>
+
+  <EXTERNALPORTS>
+    <PORT CLKFREQUENCY="400000000.0" DIR="I" NAME="ap_clk" SIGIS="clk" SIGNAME="External_Ports_ap_clk">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="hls_inst" PORT="ap_clk"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="ap_rst_n" SIGIS="rst" SIGNAME="External_Ports_ap_rst_n">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="hls_inst" PORT="ap_rst_n"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="xk_tvalid" SIGIS="undef" SIGNAME="hls_inst_xk_TVALID">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="hls_inst" PORT="xk_TVALID"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="xk_tready" SIGIS="undef" SIGNAME="hls_inst_xk_TREADY">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="hls_inst" PORT="xk_TREADY"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="63" NAME="xk_tdata" RIGHT="0" SIGIS="undef" SIGNAME="hls_inst_xk_TDATA">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="hls_inst" PORT="xk_TDATA"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="0" NAME="xk_tlast" RIGHT="0" SIGIS="undef" SIGNAME="hls_inst_xk_TLAST">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="hls_inst" PORT="xk_TLAST"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="xn_tvalid" SIGIS="undef" SIGNAME="hls_inst_xn_TVALID">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="hls_inst" PORT="xn_TVALID"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="xn_tready" SIGIS="undef" SIGNAME="hls_inst_xn_TREADY">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="hls_inst" PORT="xn_TREADY"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" LEFT="63" NAME="xn_tdata" RIGHT="0" SIGIS="undef" SIGNAME="hls_inst_xn_TDATA">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="hls_inst" PORT="xn_TDATA"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" LEFT="0" NAME="xn_tlast" RIGHT="0" SIGIS="undef" SIGNAME="hls_inst_xn_TLAST">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="hls_inst" PORT="xn_TLAST"/>
+      </CONNECTIONS>
+    </PORT>
+  </EXTERNALPORTS>
+
+  <EXTERNALINTERFACES>
+    <BUSINTERFACE BUSNAME="hls_inst_xk" NAME="xk" TYPE="INITIATOR">
+      <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="8"/>
+      <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
+      <PARAMETER NAME="TID_WIDTH" VALUE="0"/>
+      <PARAMETER NAME="TUSER_WIDTH" VALUE="0"/>
+      <PARAMETER NAME="HAS_TREADY" VALUE="1"/>
+      <PARAMETER NAME="HAS_TSTRB" VALUE="0"/>
+      <PARAMETER NAME="HAS_TKEEP" VALUE="0"/>
+      <PARAMETER NAME="HAS_TLAST" VALUE="1"/>
+      <PARAMETER NAME="FREQ_HZ" VALUE="400000000.0"/>
+      <PARAMETER NAME="PHASE" VALUE="0.000"/>
+      <PARAMETER NAME="CLK_DOMAIN" VALUE="bd_0_ap_clk_0"/>
+      <PARAMETER NAME="LAYERED_METADATA" VALUE="undef"/>
+      <PARAMETER NAME="INSERT_VIP" VALUE="0"/>
+      <PORTMAPS>
+        <PORTMAP LOGICAL="TVALID" PHYSICAL="xk_tvalid"/>
+        <PORTMAP LOGICAL="TREADY" PHYSICAL="xk_tready"/>
+        <PORTMAP LOGICAL="TDATA" PHYSICAL="xk_tdata"/>
+        <PORTMAP LOGICAL="TLAST" PHYSICAL="xk_tlast"/>
+      </PORTMAPS>
+    </BUSINTERFACE>
+    <BUSINTERFACE BUSNAME="External_Interface_xn" NAME="xn" TYPE="TARGET">
+      <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="8"/>
+      <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
+      <PARAMETER NAME="TID_WIDTH" VALUE="0"/>
+      <PARAMETER NAME="TUSER_WIDTH" VALUE="0"/>
+      <PARAMETER NAME="HAS_TREADY" VALUE="1"/>
+      <PARAMETER NAME="HAS_TSTRB" VALUE="0"/>
+      <PARAMETER NAME="HAS_TKEEP" VALUE="0"/>
+      <PARAMETER NAME="HAS_TLAST" VALUE="1"/>
+      <PARAMETER NAME="FREQ_HZ" VALUE="400000000.0"/>
+      <PARAMETER NAME="PHASE" VALUE="0.000"/>
+      <PARAMETER NAME="CLK_DOMAIN" VALUE="bd_0_ap_clk_0"/>
+      <PARAMETER NAME="LAYERED_METADATA" VALUE="undef"/>
+      <PARAMETER NAME="INSERT_VIP" VALUE="0"/>
+      <PORTMAPS>
+        <PORTMAP LOGICAL="TVALID" PHYSICAL="xn_tvalid"/>
+        <PORTMAP LOGICAL="TREADY" PHYSICAL="xn_tready"/>
+        <PORTMAP LOGICAL="TDATA" PHYSICAL="xn_tdata"/>
+        <PORTMAP LOGICAL="TLAST" PHYSICAL="xn_tlast"/>
+      </PORTMAPS>
+    </BUSINTERFACE>
+  </EXTERNALINTERFACES>
+
+  <MODULES>
+    <MODULE COREREVISION="2005010023" FULLNAME="/hls_inst" HWVERSION="1.0" INSTANCE="hls_inst" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="fft2d_top" VLNV="EA:hls:fft2d_top:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="bd_0_hls_inst_0"/>
+        <PARAMETER NAME="clk_period" VALUE="2.5"/>
+        <PARAMETER NAME="machine" VALUE="64"/>
+        <PARAMETER NAME="combinational" VALUE="0"/>
+        <PARAMETER NAME="latency" VALUE="17299"/>
+        <PARAMETER NAME="II" VALUE="x"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT CLKFREQUENCY="400000000.0" DIR="I" NAME="ap_clk" SIGIS="clk" SIGNAME="External_Ports_ap_clk">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="ap_clk"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="ap_rst_n" SIGIS="rst" SIGNAME="External_Ports_ap_rst_n">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="ap_rst_n"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="xn_TVALID" SIGIS="undef" SIGNAME="hls_inst_xn_TVALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_0_imp" PORT="xn_tvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="xn_TREADY" SIGIS="undef" SIGNAME="hls_inst_xn_TREADY">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_0_imp" PORT="xn_tready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="63" NAME="xn_TDATA" RIGHT="0" SIGIS="undef" SIGNAME="hls_inst_xn_TDATA">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_0_imp" PORT="xn_tdata"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="0" NAME="xn_TLAST" RIGHT="0" SIGIS="undef" SIGNAME="hls_inst_xn_TLAST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_0_imp" PORT="xn_tlast"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="xk_TVALID" SIGIS="undef" SIGNAME="hls_inst_xk_TVALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_0_imp" PORT="xk_tvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="xk_TREADY" SIGIS="undef" SIGNAME="hls_inst_xk_TREADY">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_0_imp" PORT="xk_tready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="63" NAME="xk_TDATA" RIGHT="0" SIGIS="undef" SIGNAME="hls_inst_xk_TDATA">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_0_imp" PORT="xk_tdata"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="0" NAME="xk_TLAST" RIGHT="0" SIGIS="undef" SIGNAME="hls_inst_xk_TLAST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_0_imp" PORT="xk_tlast"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES>
+        <BUSINTERFACE BUSNAME="External_Interface_xn" NAME="xn" TYPE="TARGET" VLNV="xilinx.com:interface:axis:1.0">
+          <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="8"/>
+          <PARAMETER NAME="TUSER_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="LAYERED_METADATA" VALUE="undef"/>
+          <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="TID_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="HAS_TREADY" VALUE="1"/>
+          <PARAMETER NAME="HAS_TSTRB" VALUE="0"/>
+          <PARAMETER NAME="HAS_TKEEP" VALUE="0"/>
+          <PARAMETER NAME="HAS_TLAST" VALUE="1"/>
+          <PARAMETER NAME="FREQ_HZ" VALUE="400000000.0"/>
+          <PARAMETER NAME="PHASE" VALUE="0.000"/>
+          <PARAMETER NAME="CLK_DOMAIN" VALUE="bd_0_ap_clk_0"/>
+          <PARAMETER NAME="INSERT_VIP" VALUE="0"/>
+          <PORTMAPS>
+            <PORTMAP LOGICAL="TVALID" PHYSICAL="xn_TVALID"/>
+            <PORTMAP LOGICAL="TREADY" PHYSICAL="xn_TREADY"/>
+            <PORTMAP LOGICAL="TDATA" PHYSICAL="xn_TDATA"/>
+            <PORTMAP LOGICAL="TLAST" PHYSICAL="xn_TLAST"/>
+          </PORTMAPS>
+        </BUSINTERFACE>
+        <BUSINTERFACE BUSNAME="hls_inst_xk" NAME="xk" TYPE="INITIATOR" VLNV="xilinx.com:interface:axis:1.0">
+          <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="8"/>
+          <PARAMETER NAME="TUSER_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="LAYERED_METADATA"/>
+          <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="TID_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="HAS_TREADY" VALUE="1"/>
+          <PARAMETER NAME="HAS_TSTRB" VALUE="0"/>
+          <PARAMETER NAME="HAS_TKEEP" VALUE="0"/>
+          <PARAMETER NAME="HAS_TLAST" VALUE="1"/>
+          <PARAMETER NAME="FREQ_HZ" VALUE="400000000.0"/>
+          <PARAMETER NAME="PHASE" VALUE="0.000"/>
+          <PARAMETER NAME="CLK_DOMAIN" VALUE="bd_0_ap_clk_0"/>
+          <PARAMETER NAME="INSERT_VIP" VALUE="0"/>
+          <PORTMAPS>
+            <PORTMAP LOGICAL="TVALID" PHYSICAL="xk_TVALID"/>
+            <PORTMAP LOGICAL="TREADY" PHYSICAL="xk_TREADY"/>
+            <PORTMAP LOGICAL="TDATA" PHYSICAL="xk_TDATA"/>
+            <PORTMAP LOGICAL="TLAST" PHYSICAL="xk_TLAST"/>
+          </PORTMAPS>
+        </BUSINTERFACE>
+      </BUSINTERFACES>
+    </MODULE>
+  </MODULES>
+
+</EDKSYSTEM>
